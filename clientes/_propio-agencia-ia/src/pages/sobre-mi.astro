@@ -1,0 +1,192 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const timeline = [
+  { año: "2018", titulo: "Inicio carrera cloud", desc: "Empiezo en infraestructura cloud AWS/Azure para empresas medianas." },
+  { año: "2020", titulo: "Especialización enterprise", desc: "Migro a arquitectura de sistemas críticos. Aprendo rigor de production-grade." },
+  { año: "2022", titulo: "Mercedes-Benz", desc: "Empiezo en Mercedes-Benz como Cloud Architect. Sistemas que mueven millones de euros, uptime 99.99%." },
+  { año: "2024", titulo: "Descubrimiento IA aplicada", desc: "Aplico Claude API a mis propios procesos. Sorpresa: 70-80% de tareas operativas son automatizables hoy." },
+  { año: "2026", titulo: "Agencia IA Madrid Este", desc: "Lanzo este proyecto para aplicar lo aprendido en cloud enterprise a PYMEs locales del corredor del Henares." }
+];
+
+const valores = [
+  {
+    icono: "🔒",
+    titulo: "Rigor enterprise",
+    desc: "Aplico los mismos principios de Mercedes a PYMEs: sistemas testeados, monitorizados, documentados, escalables."
+  },
+  {
+    icono: "🎯",
+    titulo: "Honesto sobre límites",
+    desc: "Si tu caso no encaja con mi servicio, te lo digo. Si la IA no es la solución, te lo digo. Mi reputación vale más que un cliente."
+  },
+  {
+    icono: "⚡",
+    titulo: "Velocidad real",
+    desc: "Implementaciones en 2-4 semanas, no 6 meses. Sin reuniones inútiles ni PowerPoints decorativos."
+  },
+  {
+    icono: "💰",
+    titulo: "Precios transparentes",
+    desc: "Rangos públicos, criterios claros, contratos cerrados. Cero 'depende' ni sorpresas en factura."
+  },
+  {
+    icono: "🏠",
+    titulo: "Local, no global",
+    desc: "Solo trabajo Madrid Este. Conozco tu zona, tu mercado, tus gremios. Densidad geográfica > volumen."
+  },
+  {
+    icono: "🔧",
+    titulo: "Tu código es tuyo",
+    desc: "Si me retiro, tú sigues. Todo lo construido vive en tu cuenta, con tu acceso, sin dependencia de mí."
+  }
+];
+---
+
+<Layout
+  title="Sobre mí — Agencia IA Madrid Este"
+  description="Cloud Arquitecto enterprise (Mercedes-Benz) aplicando rigor técnico a automatización con IA para PYMEs locales."
+>
+  <Nav activePath="/sobre-mi" />
+
+  <!-- Hero -->
+  <section class="pt-32 pb-12 px-4 sm:px-6 hero-gradient">
+    <div class="max-w-5xl mx-auto fade-in">
+      <div class="grid lg:grid-cols-3 gap-12 items-center">
+        <div class="lg:col-span-2">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/30 mb-6">
+            <span class="text-sm text-indigo-300">Sobre mí · Background real</span>
+          </div>
+          <h1 class="text-4xl sm:text-6xl font-display font-bold text-white leading-tight mb-6">
+            Cloud arquitecto enterprise.<br/>
+            <span class="gradient-text">Ahora para PYMEs locales.</span>
+          </h1>
+          <p class="text-xl text-slate-300 leading-relaxed">
+            8 años construyendo infraestructura para Mercedes-Benz. Aplico el mismo rigor técnico a automatizaciones reales para negocios pequeños de Madrid Este.
+          </p>
+        </div>
+
+        <div class="hidden lg:block">
+          <div class="rounded-3xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 p-8 text-center">
+            <div class="w-32 h-32 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 mx-auto mb-4 flex items-center justify-center text-5xl font-bold text-white">JA</div>
+            <div class="text-white font-bold text-lg">Jorge Aguirre</div>
+            <div class="text-indigo-300 text-sm">Founder · Agencia IA Madrid Este</div>
+            <div class="text-slate-500 text-xs mt-2">Torrejón de Ardoz</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bio principal -->
+  <section class="py-16 px-4 sm:px-6">
+    <div class="max-w-3xl mx-auto">
+      <div class="prose prose-invert prose-lg max-w-none space-y-6 text-slate-300 leading-relaxed">
+        <p>
+          Soy <strong class="text-white">Jorge Aguirre</strong>. Llevo 8 años construyendo infraestructura cloud para grandes empresas. Mi trabajo principal es en <strong class="text-white">Mercedes-Benz</strong>, donde mantengo sistemas que procesan millones de transacciones al día con uptime del 99.99%.
+        </p>
+        <p>
+          En 2024 empecé a aplicar IA (Anthropic Claude principalmente) a mis propios procesos. La sorpresa fue ver cómo problemas que en mi trabajo enterprise son rutinarios — clasificar, extraer información, generar contenido contextual, integrar sistemas — son los mismos problemas que tienen miles de PYMEs locales, pero <strong class="text-white">sin acceso al rigor técnico que se les aplica en una empresa grande</strong>.
+        </p>
+        <p>
+          Por eso este proyecto. Aplicar lo aprendido en arquitectura enterprise (testing, monitorización, documentación, contratos blindados, garantías reales) a automatizaciones para restaurantes, clínicas, despachos del corredor Madrid-Henares.
+        </p>
+        <p>
+          Mi cliente típico es un negocio de 3-20 empleados que pierde 10-20 horas/semana en tareas que la IA hace al 70-80%. Yo identifico cuáles (diagnóstico de $300-$700), las construyo (implementación $1.500-$5.000 con precio cerrado), y las mantengo afinadas mes a mes ($200+/mes).
+        </p>
+        <p class="text-slate-400 italic">
+          No vengo del mundo "agencia de marketing" reciclada en IA. Vengo del mundo donde un fallo cuesta seis cifras y la responsabilidad es directa. Ese rigor se traslada a cada cliente, sin importar el ticket.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="py-16 px-4 sm:px-6 bg-slate-950/50">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="rounded-2xl bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/30 p-6 text-center">
+          <div class="text-4xl font-bold text-white mb-2">8+</div>
+          <div class="text-indigo-300 text-sm">Años cloud enterprise</div>
+        </div>
+        <div class="rounded-2xl bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 border border-emerald-500/30 p-6 text-center">
+          <div class="text-4xl font-bold text-white mb-2">99.99%</div>
+          <div class="text-emerald-300 text-sm">Uptime objetivo Mercedes</div>
+        </div>
+        <div class="rounded-2xl bg-gradient-to-br from-orange-500/10 to-yellow-500/10 border border-orange-500/30 p-6 text-center">
+          <div class="text-4xl font-bold text-white mb-2">2 sem</div>
+          <div class="text-orange-300 text-sm">Tiempo medio entrega</div>
+        </div>
+        <div class="rounded-2xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/30 p-6 text-center">
+          <div class="text-4xl font-bold text-white mb-2">100%</div>
+          <div class="text-purple-300 text-sm">Garantía devolución</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="py-16 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl sm:text-4xl font-display font-bold text-white text-center mb-12">
+        Mi camino hasta aquí
+      </h2>
+
+      <div class="relative">
+        <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-indigo-500/40 via-purple-500/40 to-orange-500/40"></div>
+
+        <div class="space-y-8">
+          {timeline.map((item) => (
+            <div class="flex gap-6 items-start">
+              <div class="flex-shrink-0 w-16 h-16 rounded-full bg-slate-900 border-2 border-indigo-500/60 flex items-center justify-center text-indigo-400 font-bold text-sm z-10">
+                {item.año}
+              </div>
+              <div class="rounded-xl bg-slate-900/50 border border-slate-800 p-5 flex-1 hover:border-indigo-500/30 transition-colors">
+                <h3 class="text-lg font-bold text-white mb-1">{item.titulo}</h3>
+                <p class="text-sm text-slate-400">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Valores -->
+  <section class="py-16 px-4 sm:px-6 bg-slate-950/50">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl sm:text-4xl font-display font-bold text-white text-center mb-12">
+        Cómo trabajo
+      </h2>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {valores.map((v) => (
+          <div class="rounded-2xl bg-slate-900/50 border border-slate-800 p-6 hover:border-indigo-500/30 transition-colors">
+            <div class="text-4xl mb-4">{v.icono}</div>
+            <h3 class="text-lg font-bold text-white mb-2">{v.titulo}</h3>
+            <p class="text-sm text-slate-400">{v.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 px-4 sm:px-6 hero-gradient">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl sm:text-5xl font-display font-bold text-white mb-6">
+        ¿Hablamos de tu caso?
+      </h2>
+      <p class="text-xl text-slate-300 mb-8">
+        20 minutos. Sin compromiso. Te cuento honestamente si tu negocio encaja con lo que hago.
+      </p>
+      <a href="/contacto" class="inline-block px-8 py-4 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-semibold transition-all hover:scale-105 card-glow-strong">
+        Reservar llamada gratuita
+      </a>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

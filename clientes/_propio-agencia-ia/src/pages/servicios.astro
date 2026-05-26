@@ -1,0 +1,217 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const tiers = [
+  {
+    label: "DIAGNÓSTICO",
+    nombre: "Diagnóstico",
+    precio: "$300 — $700",
+    precioDetalle: "Según complejidad",
+    duracion: "3-5 días",
+    barra: "Se percibe como inversión baja",
+    color: "indigo",
+    items: [
+      "Llamada kickoff 45 min · mapeo procesos manuales",
+      "Auditoría escrita: 3-5 procesos priorizados por ROI",
+      "Quick-win demo en vivo con tus datos reales",
+      "Propuesta de implementación al final",
+      "Garantía: devolución 100% si no aporta valor"
+    ],
+    mathLabel: "X diagnósticos/mes",
+    mathValor: "$600 — $1.400"
+  },
+  {
+    label: "IMPLEMENTACIÓN",
+    nombre: "Implementación",
+    precio: "$1.500 — $5.000",
+    precioDetalle: "Por proyecto · Precio cerrado",
+    duracion: "2-4 semanas",
+    barra: "El margen real está aquí",
+    color: "orange",
+    destacado: true,
+    items: [
+      "Una automatización concreta, en producción",
+      "Pago 50% al firmar / 50% a entrega validada",
+      "2 rondas de revisiones incluidas",
+      "30 días de garantía técnica post-entrega",
+      "Documentación + handover 1 hora"
+    ],
+    mathLabel: "1 implementación/mes",
+    mathValor: "$1.500 — $5.000"
+  },
+  {
+    label: "MANTENIMIENTO",
+    nombre: "Mantenimiento",
+    precio: "$200+",
+    precioDetalle: "Por mes · Cancelable",
+    duracion: "Continuo",
+    barra: "Por cada cliente que implementas, mantenimiento recurrente",
+    color: "emerald",
+    items: [
+      "Monitorización 24/7 del workflow",
+      "2-10h soporte/mes (según tier)",
+      "Ajustes prompts según feedback",
+      "Reporte mensual con métricas reales",
+      "WhatsApp directo en horario laboral"
+    ],
+    mathLabel: "10 clientes en mantenimiento",
+    mathValor: "$2.000+/mes recurrente"
+  }
+];
+
+const implementaciones = [
+  { titulo: "Bot WhatsApp básico", precio: "$1.500", tiempo: "10-15h", desc: "Responde 70% mensajes en tu tono + captura leads" },
+  { titulo: "Generador de contenidos", precio: "$2.500", tiempo: "15-20h", desc: "4 posts + 1 reel + 1 carrusel semanal en tu tono" },
+  { titulo: "Propuestas comerciales", precio: "$3.500", tiempo: "25-30h", desc: "Tu comercial rellena 8 campos, PDF en 5 min" },
+  { titulo: "Workflow multi-sistema", precio: "$5.000", tiempo: "35-45h", desc: "Integraciones CRM + Email + Internal · custom" }
+];
+
+const tiersMantenimiento = [
+  { tier: "Basic", precio: "$200/mes", horas: "2h", para: "Sistemas estables" },
+  { tier: "Pro", precio: "$400/mes", horas: "5h + 1 mejora/mes", para: "Cliente en evolución" },
+  { tier: "Scale", precio: "$800/mes", horas: "10h + features nuevas", para: "Sistemas críticos B2B" }
+];
+---
+
+<Layout
+  title="Servicios — Agencia IA Madrid Este"
+  description="3 servicios con precios cerrados: Diagnóstico ($300-$700), Implementación ($1.500-$5.000), Mantenimiento ($200+/mes)."
+>
+  <Nav activePath="/servicios" />
+
+  <!-- Hero -->
+  <section class="pt-32 pb-12 px-4 sm:px-6 hero-gradient">
+    <div class="max-w-5xl mx-auto text-center fade-in">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/30 mb-6">
+        <span class="text-sm text-indigo-300">Servicios · Precios cerrados</span>
+      </div>
+      <h1 class="text-5xl sm:text-6xl font-display font-bold text-white leading-tight mb-6">
+        3 servicios. <span class="gradient-text">3 precios cerrados.</span>
+      </h1>
+      <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+        Sin "depende". Sin presupuestos abiertos. Cada servicio tiene rango oficial, precio acordado pre-implementación, y contrato fijo.
+      </p>
+    </div>
+  </section>
+
+  <!-- 3 tiers -->
+  <section class="py-16 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-3 gap-6">
+        {tiers.map((tier) => {
+          const isOrange = tier.color === 'orange';
+          const isEmerald = tier.color === 'emerald';
+          const borderClass = isOrange ? 'border-orange-500/40 card-glow-strong' : isEmerald ? 'border-emerald-500/30' : 'border-indigo-500/30';
+          const labelClass = isOrange ? 'text-orange-400' : isEmerald ? 'text-emerald-400' : 'text-indigo-400';
+          const priceClass = isOrange ? 'text-orange-400' : isEmerald ? 'text-emerald-400' : 'text-white';
+          const barClass = isOrange ? 'bg-orange-500/10 border-orange-500/30 text-orange-300' : isEmerald ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300' : 'bg-indigo-500/10 border-indigo-500/30 text-indigo-300';
+
+          return (
+            <div class={`relative rounded-2xl bg-slate-900/50 backdrop-blur-sm border ${borderClass} p-8 transition-all hover:scale-[1.02]`}>
+              {tier.destacado && (
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-orange-500 text-white text-xs font-bold uppercase tracking-wider">
+                  El margen real
+                </div>
+              )}
+              <div class={`text-xs font-bold tracking-widest ${labelClass} mb-2`}>{tier.label}</div>
+              <h3 class="text-2xl font-display font-bold text-white mb-1">{tier.nombre}</h3>
+              <div class={`text-4xl sm:text-5xl font-bold ${priceClass} mb-1 leading-tight`}>{tier.precio}</div>
+              <div class="text-sm text-slate-500 mb-2">{tier.precioDetalle}</div>
+              <div class="text-sm text-slate-400 mb-6">{tier.duracion}</div>
+              <div class={`px-4 py-3 rounded-lg border ${barClass} text-sm font-medium mb-6`}>{tier.barra}</div>
+              <ul class="space-y-3 mb-8">
+                {tier.items.map((item) => (
+                  <li class="flex items-start gap-3 text-sm text-slate-300">
+                    <svg class="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <div class="pt-6 border-t border-slate-800">
+                <div class={`px-3 py-2 rounded-lg ${barClass} text-xs font-medium text-center`}>{tier.mathLabel} = <strong>{tier.mathValor}</strong></div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <p class="text-center text-slate-500 mt-12 max-w-3xl mx-auto italic">
+        Precios de lanzamiento: arrancamos en el mínimo de cada rango ($300 / $1.500 / $200) para los primeros 5 clientes. Después escalamos hacia la media del rango según hitos de calidad.
+      </p>
+    </div>
+  </section>
+
+  <!-- Implementaciones detalle -->
+  <section class="py-16 px-4 sm:px-6 bg-slate-950/50">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl sm:text-4xl font-display font-bold text-white text-center mb-4">
+        Qué se implementa exactamente
+      </h2>
+      <p class="text-center text-slate-400 mb-12 max-w-2xl mx-auto">
+        El rango $1.500 — $5.000 se desglosa según el caso de uso. Aquí están los 4 paquetes principales.
+      </p>
+
+      <div class="grid sm:grid-cols-2 gap-4">
+        {implementaciones.map((impl) => (
+          <div class="rounded-xl bg-slate-900/50 border border-slate-800 p-5 hover:border-indigo-500/30 transition-all">
+            <div class="flex items-start justify-between mb-2">
+              <h3 class="text-lg font-bold text-white">{impl.titulo}</h3>
+              <span class="text-xl font-bold text-orange-400">{impl.precio}</span>
+            </div>
+            <p class="text-sm text-slate-400 mb-3">{impl.desc}</p>
+            <div class="text-xs text-slate-500">Tu tiempo estimado: {impl.tiempo}</div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-8 text-center">
+        <a href="/casos-uso" class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors">
+          Ver casos de uso con mockups visuales
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mantenimiento tiers -->
+  <section class="py-16 px-4 sm:px-6">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl sm:text-4xl font-display font-bold text-white text-center mb-4">
+        Mantenimiento · 3 tiers según uso
+      </h2>
+      <p class="text-center text-slate-400 mb-12 max-w-2xl mx-auto">
+        Tras la implementación, eliges el tier que mejor encaja. Cancelable con 15 días de aviso tras los primeros 3 meses.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {tiersMantenimiento.map((tier) => (
+          <div class="rounded-2xl bg-slate-900/50 border border-emerald-500/20 p-6">
+            <div class="text-xs font-bold tracking-widest text-emerald-400 mb-2">{tier.tier.toUpperCase()}</div>
+            <div class="text-4xl font-bold text-white mb-2">{tier.precio}</div>
+            <div class="text-sm text-slate-400 mb-4">{tier.horas} de soporte</div>
+            <div class="text-sm text-slate-500 italic">{tier.para}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 px-4 sm:px-6 hero-gradient">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl sm:text-5xl font-display font-bold text-white mb-6">
+        ¿Empezamos por el Diagnóstico?
+      </h2>
+      <p class="text-xl text-slate-300 mb-8">
+        5 días, $300, con garantía. Salida limpia o avanzamos a implementación.
+      </p>
+      <a href="/contacto" class="inline-block px-8 py-4 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-semibold transition-all hover:scale-105 card-glow-strong">
+        Reservar diagnóstico (desde $300)
+      </a>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

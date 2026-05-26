@@ -1,0 +1,238 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const pasos = [
+  {
+    numero: "1",
+    color: "indigo",
+    duracion: "20 minutos · Gratis",
+    titulo: "Llamada de calificación",
+    descripcion: "Una videollamada corta para ver si encajamos. Te pregunto por tu negocio, los procesos que más horas te consumen, tu disposición a invertir. Si veo que no soy el indicado, te recomiendo a otro profesional sin compromiso.",
+    incluye: [
+      "Conversación abierta sobre tu día a día operativo",
+      "Identifico señales tempranas de automatización válida",
+      "Te explico cómo funciona el embudo de 3 pasos",
+      "Si encaja, agendamos el diagnóstico. Si no, te recomiendo a alguien que sí encaje"
+    ]
+  },
+  {
+    numero: "2",
+    color: "indigo",
+    duracion: "5 días · $300 — $700",
+    titulo: "Diagnóstico (Pago único)",
+    descripcion: "5 días intensivos de auditoría. Identifico tus 3-5 procesos automatizables con mejor ROI. Te entrego documento + demo en vivo con tus datos reales. Si no aporta valor, te devuelvo el 100% sin preguntas.",
+    incluye: [
+      "Día 1: Kickoff 45 min videollamada · mapeo de procesos",
+      "Día 2-3: Análisis cuantitativo · horas dedicadas, costes, complejidad",
+      "Día 4: Quick-win demo con tus mensajes/datos reales",
+      "Día 5: Documento entregable de 3-5 páginas + propuesta de implementación"
+    ]
+  },
+  {
+    numero: "3",
+    color: "orange",
+    duracion: "2-4 semanas · $1.500 — $5.000",
+    titulo: "Implementación (50% / 50%)",
+    descripcion: "Construyo la automatización que decidimos en el diagnóstico. Precio cerrado y fijo desde el primer día. 50% al firmar, 50% a la entrega validada. Sin sorpresas ni 'change requests' escondidos.",
+    incluye: [
+      "Setup técnico + integración con tus sistemas actuales",
+      "Iteración con tus datos reales hasta llegar a 70%+ de éxito",
+      "Documentación + handover de 1 hora con tu equipo",
+      "2 rondas de revisiones incluidas + 30 días de garantía técnica"
+    ]
+  },
+  {
+    numero: "4",
+    color: "emerald",
+    duracion: "Continuo · $200+/mes",
+    titulo: "Mantenimiento (Opcional pero recomendado)",
+    descripcion: "Una vez en producción, mantengo el sistema afinado mes a mes. Sin mantenimiento, las automatizaciones se degradan en 3-6 meses. Cancelable con 15 días de aviso tras los primeros 3 meses.",
+    incluye: [
+      "Monitorización 24/7 del workflow + alertas automáticas",
+      "2-10h/mes de soporte según tier (Basic / Pro / Scale)",
+      "Ajustes mensuales de prompts según feedback real",
+      "Reporte mensual con métricas reales + recomendaciones"
+    ]
+  }
+];
+
+const principios = [
+  { titulo: "Precios cerrados", desc: "Cero 'depende'. Sabes exactamente qué pagas antes de firmar." },
+  { titulo: "Garantías reales", desc: "Si el diagnóstico no aporta valor, devolución 100%. 30 días de garantía técnica post-entrega." },
+  { titulo: "Scope blindado", desc: "Lo que se firma se entrega. Cambios fuera del scope → cotización aparte transparente." },
+  { titulo: "Cobro escalonado", desc: "50% al firmar, 50% al validar la entrega. Tú decides cuándo está listo." },
+  { titulo: "Sin compromiso largo", desc: "Mantenimiento cancelable tras 3 meses con 15 días de aviso." },
+  { titulo: "Tu código, tus datos", desc: "Todo lo construido es tuyo. Si me voy, tú sigues funcionando." }
+];
+---
+
+<Layout
+  title="Proceso — Agencia IA Madrid Este"
+  description="Embudo en 4 pasos: Llamada gratis · Diagnóstico · Implementación · Mantenimiento. Precios cerrados, garantías reales."
+>
+  <Nav activePath="/proceso" />
+
+  <!-- Hero -->
+  <section class="pt-32 pb-12 px-4 sm:px-6 hero-gradient">
+    <div class="max-w-5xl mx-auto text-center fade-in">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/30 mb-6">
+        <span class="text-sm text-indigo-300">Proceso transparente · 4 pasos</span>
+      </div>
+      <h1 class="text-5xl sm:text-6xl font-display font-bold text-white leading-tight mb-6">
+        Cómo trabajamos <span class="gradient-text">juntos</span>
+      </h1>
+      <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+        Sin reuniones eternas. Sin PowerPoints. 4 pasos con precios cerrados y plazos claros desde el primer día.
+      </p>
+    </div>
+  </section>
+
+  <!-- Steps -->
+  <section class="py-16 px-4 sm:px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="space-y-8">
+        {pasos.map((paso) => {
+          const colorClass = paso.color === 'orange' ? 'orange' : paso.color === 'emerald' ? 'emerald' : 'indigo';
+          const borderHex = {indigo: 'border-indigo-500/30', orange: 'border-orange-500/40', emerald: 'border-emerald-500/30'}[colorClass];
+          const bgHex = {indigo: 'bg-indigo-500/20', orange: 'bg-orange-500/20', emerald: 'bg-emerald-500/20'}[colorClass];
+          const textHex = {indigo: 'text-indigo-400', orange: 'text-orange-400', emerald: 'text-emerald-400'}[colorClass];
+
+          return (
+            <div class={`rounded-2xl bg-slate-900/50 backdrop-blur-sm border ${borderHex} overflow-hidden`}>
+              <div class="grid sm:grid-cols-12">
+                <div class={`sm:col-span-3 ${bgHex} p-8 border-r border-slate-800 flex flex-col items-center justify-center`}>
+                  <div class={`w-16 h-16 rounded-2xl bg-slate-900/50 border ${borderHex} flex items-center justify-center text-4xl font-bold ${textHex} mb-4`}>
+                    {paso.numero}
+                  </div>
+                  <div class={`text-xs ${textHex} font-bold uppercase tracking-wider text-center`}>{paso.duracion}</div>
+                </div>
+
+                <div class="sm:col-span-9 p-8">
+                  <h2 class="text-2xl sm:text-3xl font-display font-bold text-white mb-3">{paso.titulo}</h2>
+                  <p class="text-slate-300 mb-6">{paso.descripcion}</p>
+
+                  <ul class="space-y-3">
+                    {paso.incluye.map((item) => (
+                      <li class="flex items-start gap-3 text-sm text-slate-300">
+                        <svg class={`w-5 h-5 ${textHex} flex-shrink-0 mt-0.5`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- Principios -->
+  <section class="py-16 px-4 sm:px-6 bg-slate-950/50">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl sm:text-4xl font-display font-bold text-white text-center mb-12">
+        6 principios que aplico en cada cliente
+      </h2>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {principios.map((p) => (
+          <div class="rounded-2xl bg-slate-900/50 border border-slate-800 p-6 hover:border-indigo-500/30 transition-colors">
+            <div class="w-10 h-10 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 mb-4">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">{p.titulo}</h3>
+            <p class="text-sm text-slate-400">{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline visual -->
+  <section class="py-16 px-4 sm:px-6">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl sm:text-4xl font-display font-bold text-white text-center mb-4">
+        Línea temporal de tu primer caso
+      </h2>
+      <p class="text-center text-slate-400 mb-12">
+        De primer contacto a sistema funcionando: típicamente 3-4 semanas.
+      </p>
+
+      <div class="relative">
+        <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-indigo-500/40 via-orange-500/40 to-emerald-500/40"></div>
+
+        <div class="space-y-8 ml-2">
+          <div class="flex gap-6 items-start">
+            <div class="w-14 h-14 rounded-full bg-indigo-500/20 border-2 border-indigo-500/60 flex items-center justify-center text-indigo-400 font-bold z-10 flex-shrink-0">D0</div>
+            <div class="pt-2">
+              <div class="text-sm text-indigo-400 font-bold">Día 0 · Hoy</div>
+              <div class="text-white font-semibold">Reservas la llamada de calificación · Calendly</div>
+            </div>
+          </div>
+          <div class="flex gap-6 items-start">
+            <div class="w-14 h-14 rounded-full bg-indigo-500/20 border-2 border-indigo-500/60 flex items-center justify-center text-indigo-400 font-bold z-10 flex-shrink-0">D2</div>
+            <div class="pt-2">
+              <div class="text-sm text-indigo-400 font-bold">Día 2 · Calificación</div>
+              <div class="text-white font-semibold">Llamada 20 min · evaluamos encaje · decisión avanzar/parar</div>
+            </div>
+          </div>
+          <div class="flex gap-6 items-start">
+            <div class="w-14 h-14 rounded-full bg-indigo-500/20 border-2 border-indigo-500/60 flex items-center justify-center text-indigo-400 font-bold z-10 flex-shrink-0">D3</div>
+            <div class="pt-2">
+              <div class="text-sm text-indigo-400 font-bold">Día 3 · Pago + Kickoff</div>
+              <div class="text-white font-semibold">Pagas diagnóstico ($300) · agendamos kickoff de 45 min</div>
+            </div>
+          </div>
+          <div class="flex gap-6 items-start">
+            <div class="w-14 h-14 rounded-full bg-indigo-500/20 border-2 border-indigo-500/60 flex items-center justify-center text-indigo-400 font-bold z-10 flex-shrink-0">D8</div>
+            <div class="pt-2">
+              <div class="text-sm text-indigo-400 font-bold">Día 8 · Diagnóstico entregado</div>
+              <div class="text-white font-semibold">Recibes documento + demo + propuesta de implementación</div>
+            </div>
+          </div>
+          <div class="flex gap-6 items-start">
+            <div class="w-14 h-14 rounded-full bg-orange-500/20 border-2 border-orange-500/60 flex items-center justify-center text-orange-400 font-bold z-10 flex-shrink-0">D10</div>
+            <div class="pt-2">
+              <div class="text-sm text-orange-400 font-bold">Día 10 · Firma implementación</div>
+              <div class="text-white font-semibold">Firmamos contrato · pagas 50% inicial</div>
+            </div>
+          </div>
+          <div class="flex gap-6 items-start">
+            <div class="w-14 h-14 rounded-full bg-orange-500/20 border-2 border-orange-500/60 flex items-center justify-center text-orange-400 font-bold z-10 flex-shrink-0">D24</div>
+            <div class="pt-2">
+              <div class="text-sm text-orange-400 font-bold">Día 24 · Entrega validada</div>
+              <div class="text-white font-semibold">Sistema en producción · pagas 50% restante</div>
+            </div>
+          </div>
+          <div class="flex gap-6 items-start">
+            <div class="w-14 h-14 rounded-full bg-emerald-500/20 border-2 border-emerald-500/60 flex items-center justify-center text-emerald-400 font-bold z-10 flex-shrink-0">D30</div>
+            <div class="pt-2">
+              <div class="text-sm text-emerald-400 font-bold">Día 30 · Mantenimiento activo</div>
+              <div class="text-white font-semibold">Primer pago mensual ($200+) · monitoring y ajustes mes a mes</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 px-4 sm:px-6 hero-gradient">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl sm:text-5xl font-display font-bold text-white mb-6">
+        Empezamos por la llamada de 20 min
+      </h2>
+      <p class="text-xl text-slate-300 mb-8">
+        Gratis. Sin compromiso. Si no encajamos, te lo digo claro y te recomiendo a otro.
+      </p>
+      <a href="/contacto" class="inline-block px-8 py-4 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-semibold transition-all hover:scale-105 card-glow-strong">
+        Reservar llamada gratuita
+      </a>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,167 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const casos = [
+  {
+    icono: "💬",
+    titulo: "Bot WhatsApp con IA",
+    descripcion: "Responde el 70% de los mensajes en tu tono de marca. Captura leads automáticamente. Deriva lo importante a humano con contexto.",
+    detalle: "El caso pilar — el más demandado y rentable para empezar. Funciona para restaurantes, clínicas, despachos, cualquier negocio con saturación de WhatsApp.",
+    precio: "$1.500",
+    tiempo: "10-15h",
+    mantenimiento: "$200/mes (Basic)",
+    sectores: ["Hostelería", "Clínicas", "Asesorías", "E-commerce"],
+    stack: ["WhatsApp Business API", "Claude Sonnet 4.6", "n8n", "Notion"],
+    link: "/casos/bot-whatsapp",
+    color: "indigo"
+  },
+  {
+    icono: "📝",
+    titulo: "Agente generador de contenidos",
+    descripcion: "4 posts + 1 reel + 1 carrusel semanales en tu tono. Tú revisas el lunes en 20 min, apruebas, el sistema programa.",
+    detalle: "Ideal para PYMEs que saben que tienen que publicar más pero no tienen tiempo. Cliente queda libre del lunes y mantiene presencia activa.",
+    precio: "$2.500",
+    tiempo: "15-20h",
+    mantenimiento: "$200-$400/mes",
+    sectores: ["PYMEs servicios", "Hostelería", "Profesionales"],
+    stack: ["Claude Opus 4.7", "Notion", "Buffer/Metricool", "n8n"],
+    link: "/casos/generador-contenidos",
+    color: "purple"
+  },
+  {
+    icono: "📄",
+    titulo: "Automatización de propuestas",
+    descripcion: "Tu comercial rellena un formulario de 8 campos en 3 min. PDF personalizado de 6 páginas en su email en 5 min.",
+    detalle: "Para equipos B2B con 15+ propuestas/mes. Velocidad + personalización profunda = más cierres. Reduce trabajo manual de 3-4h a 5 min.",
+    precio: "$3.500",
+    tiempo: "25-30h",
+    mantenimiento: "$400/mes (Pro)",
+    sectores: ["SaaS B2B", "Consultorías", "Agencias", "Servicios profesionales"],
+    stack: ["Claude Opus 4.7", "PDF generation", "CRM integration", "Notion"],
+    link: "/casos/propuestas",
+    color: "orange"
+  },
+  {
+    icono: "⚙️",
+    titulo: "Workflow multi-sistema custom",
+    descripcion: "Onboarding clientes, integraciones CRM-ERP-Email, reporting automatizado. Reduce 10-20h/semana del equipo operativo.",
+    detalle: "Casos a medida para PYMEs con stack maduro. Se diseña en el diagnóstico, se implementa según necesidad real. Cotización aparte.",
+    precio: "$5.000+",
+    tiempo: "35-45h+",
+    mantenimiento: "$400-$800/mes (Pro/Scale)",
+    sectores: ["Mid-market", "Industrial", "SaaS escalable"],
+    stack: ["A medida según cliente"],
+    link: "/contacto",
+    color: "emerald"
+  }
+];
+---
+
+<Layout
+  title="Casos de uso — Agencia IA Madrid Este"
+  description="4 soluciones IA con mockups visuales: Bot WhatsApp, Generador contenidos, Automatización propuestas, Workflows custom."
+>
+  <Nav activePath="/casos-uso" />
+
+  <!-- Hero -->
+  <section class="pt-32 pb-12 px-4 sm:px-6 hero-gradient">
+    <div class="max-w-5xl mx-auto text-center fade-in">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/30 mb-6">
+        <span class="text-sm text-indigo-300">Casos de uso · Con mockups visuales</span>
+      </div>
+      <h1 class="text-5xl sm:text-6xl font-display font-bold text-white leading-tight mb-6">
+        Qué <span class="gradient-text">automatizo</span> realmente
+      </h1>
+      <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+        4 soluciones probadas. Cada una con mockup visual de cómo se ve funcionando. Click en la card para ver el detalle.
+      </p>
+    </div>
+  </section>
+
+  <!-- Casos grid -->
+  <section class="py-16 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="space-y-8">
+        {casos.map((caso, i) => {
+          const isReverse = i % 2 === 1;
+          const colorClass = caso.color === 'orange' ? 'orange' : caso.color === 'emerald' ? 'emerald' : caso.color === 'purple' ? 'purple' : 'indigo';
+          const borderHex = {indigo: 'border-indigo-500/30', purple: 'border-purple-500/30', orange: 'border-orange-500/40', emerald: 'border-emerald-500/30'}[colorClass];
+          const textHex = {indigo: 'text-indigo-400', purple: 'text-purple-400', orange: 'text-orange-400', emerald: 'text-emerald-400'}[colorClass];
+
+          return (
+            <article class={`rounded-3xl bg-slate-900/50 backdrop-blur-sm border ${borderHex} p-8 sm:p-12`}>
+              <div class={`grid lg:grid-cols-2 gap-10 items-center ${isReverse ? 'lg:[direction:rtl]' : ''}`}>
+                <div class={isReverse ? 'lg:[direction:ltr]' : ''}>
+                  <div class="text-6xl mb-4">{caso.icono}</div>
+                  <h2 class="text-3xl sm:text-4xl font-display font-bold text-white mb-4">{caso.titulo}</h2>
+                  <p class="text-lg text-slate-300 mb-4">{caso.descripcion}</p>
+                  <p class="text-sm text-slate-400 mb-6">{caso.detalle}</p>
+
+                  <div class="grid grid-cols-3 gap-3 mb-6">
+                    <div class="rounded-lg bg-slate-950/50 border border-slate-800 p-3">
+                      <div class="text-xs text-slate-500 uppercase tracking-wider mb-1">Precio</div>
+                      <div class={`text-lg font-bold ${textHex}`}>{caso.precio}</div>
+                    </div>
+                    <div class="rounded-lg bg-slate-950/50 border border-slate-800 p-3">
+                      <div class="text-xs text-slate-500 uppercase tracking-wider mb-1">Tiempo</div>
+                      <div class="text-lg font-bold text-white">{caso.tiempo}</div>
+                    </div>
+                    <div class="rounded-lg bg-slate-950/50 border border-slate-800 p-3">
+                      <div class="text-xs text-slate-500 uppercase tracking-wider mb-1">Mantén.</div>
+                      <div class="text-sm font-bold text-emerald-400">{caso.mantenimiento}</div>
+                    </div>
+                  </div>
+
+                  <a href={caso.link} class={`inline-flex items-center gap-2 px-6 py-3 rounded-xl border ${borderHex} hover:bg-slate-800/50 ${textHex} font-semibold transition-all hover:scale-105`}>
+                    {caso.link.startsWith('/casos/') ? 'Ver mockup interactivo' : 'Consultar diagnóstico'}
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                  </a>
+                </div>
+
+                <div class={isReverse ? 'lg:[direction:ltr]' : ''}>
+                  <div class="rounded-2xl bg-slate-950/50 border border-slate-800 p-6">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Sectores ideales</h3>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                      {caso.sectores.map((sector) => (
+                        <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-medium">{sector}</span>
+                      ))}
+                    </div>
+
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Stack técnico</h3>
+                    <ul class="space-y-2">
+                      {caso.stack.map((tech) => (
+                        <li class="flex items-center gap-2 text-sm text-slate-400">
+                          <svg class={`w-4 h-4 ${textHex}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                          <span>{tech}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 px-4 sm:px-6 hero-gradient">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl sm:text-5xl font-display font-bold text-white mb-6">
+        ¿Cuál encaja con tu negocio?
+      </h2>
+      <p class="text-xl text-slate-300 mb-8">
+        En la llamada de diagnóstico identificamos el de mayor ROI para tu caso concreto.
+      </p>
+      <a href="/contacto" class="inline-block px-8 py-4 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-semibold transition-all hover:scale-105 card-glow-strong">
+        Reservar diagnóstico (desde $300)
+      </a>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
