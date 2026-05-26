@@ -1,0 +1,59 @@
+---
+export interface PlatoMenu {
+  nombre: string;
+  descripcion: string;
+  precio: string;
+  imagen?: string;
+  destacado?: boolean;
+}
+
+export interface CategoriaMenu {
+  titulo: string;
+  platos: PlatoMenu[];
+}
+
+export interface Props {
+  categorias: CategoriaMenu[];
+}
+
+const { categorias } = Astro.props;
+---
+
+<section id="menu" class="section">
+  <h2 class="section-title">Nuestra Carta</h2>
+  <p class="section-subtitle">Sabores auténticos preparados con ingredientes frescos cada día.</p>
+
+  <div class="space-y-16">
+    {categorias.map((cat) => (
+      <div>
+        <h3 class="text-3xl font-bold text-brand-700 mb-8 text-center md:text-left border-b border-brand-200 pb-3">
+          {cat.titulo}
+        </h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          {cat.platos.map((plato) => (
+            <div class={`flex gap-4 p-5 rounded-2xl transition-shadow hover:shadow-lg ${plato.destacado ? 'bg-brand-50 ring-2 ring-brand-200' : 'bg-white'}`}>
+              {plato.imagen && (
+                <img
+                  src={plato.imagen}
+                  alt={plato.nombre}
+                  class="w-24 h-24 object-cover rounded-xl flex-shrink-0"
+                  loading="lazy"
+                />
+              )}
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between items-start gap-2 mb-1">
+                  <h4 class="font-semibold text-lg">
+                    {plato.nombre}
+                    {plato.destacado && <span class="ml-2 text-xs bg-brand-600 text-white px-2 py-0.5 rounded-full align-middle">Recomendado</span>}
+                  </h4>
+                  <span class="text-brand-700 font-bold whitespace-nowrap">{plato.precio}</span>
+                </div>
+                <p class="text-sm text-stone-600">{plato.descripcion}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

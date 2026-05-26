@@ -1,0 +1,125 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Menu from '../components/Menu.astro';
+import About from '../components/About.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Contact from '../components/Contact.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+
+// =============================================
+// DEMO BRUNCH — Veredillas Coffee & Brunch
+// Sub-nicho: brunch / cafetería de especialidad (Parque Cataluña / Veredillas)
+// =============================================
+
+const datosRestaurante = {
+  nombre: "Veredillas Coffee & Brunch",
+  tagline: "Brunch de especialidad y café de origen, junto al Parque Cataluña.",
+  telefono: "+34 916 33 44 55",
+  whatsapp: "+34655667788",
+  email: "hola@veredillascoffee.com",
+  direccion: "Calle Veredillas 23, 28850 Torrejón de Ardoz, Madrid",
+  imagenHero: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=1920&q=80",
+  googleMapsEmbed: "https://www.google.com/maps?q=Calle+Veredillas+Torrejon+de+Ardoz&z=16&output=embed"
+};
+
+const horario = [
+  { dias: "Lunes a Viernes", horas: "08:00 - 17:00" },
+  { dias: "Sábado y Domingo", horas: "09:00 - 18:00" }
+];
+
+const menu = [
+  {
+    titulo: "Brunch",
+    platos: [
+      { nombre: "Huevos benedictinos", descripcion: "Muffin inglés, jamón cocido artesano, huevos pochados y salsa holandesa.", precio: "11€", destacado: true, imagen: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400&q=80" },
+      { nombre: "Avocado toast", descripcion: "Pan de masa madre, aguacate machacado, huevo poché, semillas y lima.", precio: "9€", destacado: true, imagen: "https://images.unsplash.com/photo-1603046891744-1f76eb10aec1?w=400&q=80" },
+      { nombre: "Pancakes de la casa", descripcion: "Pila de 3 pancakes con sirope de arce, frutos rojos y mascarpone.", precio: "10€" },
+      { nombre: "Bowl açaí", descripcion: "Açaí batido, plátano, granola casera, mantequilla de cacahuete y coco.", precio: "10€" },
+      { nombre: "Tortilla cremosa", descripcion: "Huevos camperos, queso de cabra, espinacas baby y tomate seco.", precio: "9€" }
+    ]
+  },
+  {
+    titulo: "Café de especialidad",
+    platos: [
+      { nombre: "Espresso single origin", descripcion: "Rotamos cada mes: Etiopía, Colombia o Guatemala. Pregunta por el del día.", precio: "2.20€" },
+      { nombre: "Flat white", descripcion: "Doble espresso con leche entera microespumada. El más pedido.", precio: "3.20€", destacado: true },
+      { nombre: "Filtro V60", descripcion: "Café de origen extraído al momento. Notas de cata según grano.", precio: "3.50€" },
+      { nombre: "Cold brew", descripcion: "Café infusionado en frío 18 horas. Servido con hielo y un toque de leche.", precio: "3.80€" },
+      { nombre: "Matcha latte", descripcion: "Matcha ceremonial japonés con leche de avena Oatly.", precio: "4.20€" }
+    ]
+  },
+  {
+    titulo: "Para los más golosos",
+    platos: [
+      { nombre: "Cinnamon roll", descripcion: "Rollo de canela casero, glaseado de queso crema. Recién horneado cada mañana.", precio: "4€", destacado: true, imagen: "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=400&q=80" },
+      { nombre: "Banana bread", descripcion: "Bizcocho de plátano y nueces, sin azúcar refinado.", precio: "3.50€" },
+      { nombre: "Cookie XL de la casa", descripcion: "Chocolate negro 70%, ligeramente sin hornear por dentro.", precio: "3€" }
+    ]
+  },
+  {
+    titulo: "Smoothies y zumos",
+    platos: [
+      { nombre: "Green machine", descripcion: "Espinacas, manzana, jengibre, limón y agua de coco.", precio: "5.50€" },
+      { nombre: "Berry boost", descripcion: "Frutos rojos, plátano, leche de almendras y miel.", precio: "5.50€" },
+      { nombre: "Zumo naranja exprimido", descripcion: "Naranjas valencianas, exprimido al momento.", precio: "3.50€" }
+    ]
+  }
+];
+
+const testimonios = [
+  { nombre: "Lucía Romero", texto: "El mejor sitio de Torrejón para desayunar tranquila. El flat white es brutal, los benedictinos están a la altura de cualquier sitio del centro de Madrid. Mi favorito los sábados.", estrellas: 5, fuente: "Google" },
+  { nombre: "David Pérez", texto: "Trabajo desde aquí dos mañanas por semana. WiFi rápido, café excelente, cinnamon rolls que valen el aumento de peso. El equipo es un encanto.", estrellas: 5, fuente: "Google" },
+  { nombre: "Marta Jiménez", texto: "Decoración cuidadísima, comida fresca, opciones veganas reales (no solo ensaladas). Lo recomiendo siempre que alguien me pregunta dónde brunch en la zona.", estrellas: 5, fuente: "TripAdvisor" }
+];
+---
+
+<Layout
+  title={`${datosRestaurante.nombre} — Brunch y café de especialidad en Torrejón`}
+  description={`${datosRestaurante.tagline}. Reserva tu brunch o pasa a por un buen café cerca del Parque Cataluña.`}
+>
+  <Hero
+    nombre={datosRestaurante.nombre}
+    tagline={datosRestaurante.tagline}
+    ctaTexto="Reservar mesa"
+    ctaUrl="#contacto"
+    imagenFondo={datosRestaurante.imagenHero}
+  />
+
+  <Menu categorias={menu} />
+
+  <About
+    titulo="Café que importa. Comida que se nota."
+    parrafos={[
+      "Abrimos en 2022 con una idea sencilla: que Torrejón tuviera un sitio de brunch al nivel de los mejores de Malasaña o Chueca, pero sin pagar el ticket de centro.",
+      "Tostamos nuestro café con un micro-tostador artesano de Madrid. Hacemos masa madre cada noche. Cocinamos cada plato desde cero, sin precocinados. Si te ponemos algo en el plato, es porque a nosotros también nos gustaría comerlo el sábado por la mañana."
+    ]}
+    imagen="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80"
+    imagenAlt="Interior cálido de la cafetería con barra de café"
+    datos={[
+      { label: "Café tostado", valor: "Artesano" },
+      { label: "Opciones veganas", valor: "12+" },
+      { label: "Reseñas 5★", valor: "320+" }
+    ]}
+  />
+
+  <Testimonials testimonios={testimonios} />
+
+  <Contact
+    direccion={datosRestaurante.direccion}
+    telefono={datosRestaurante.telefono}
+    email={datosRestaurante.email}
+    horario={horario}
+    googleMapsEmbed={datosRestaurante.googleMapsEmbed}
+  />
+
+  <WhatsAppFloat
+    numero={datosRestaurante.whatsapp}
+    mensaje={`Hola, quiero reservar mesa en ${datosRestaurante.nombre}`}
+  />
+
+  <footer class="bg-stone-900 text-stone-300 py-10 px-4 text-center">
+    <p class="text-sm">© {new Date().getFullYear()} {datosRestaurante.nombre}. Todos los derechos reservados.</p>
+    <p class="text-xs mt-2 text-stone-500">Web creada con cariño · <a href="#" class="hover:text-brand-400">Política de privacidad</a></p>
+  </footer>
+</Layout>

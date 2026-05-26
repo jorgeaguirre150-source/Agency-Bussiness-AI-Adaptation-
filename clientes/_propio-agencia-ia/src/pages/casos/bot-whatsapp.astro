@@ -1,0 +1,252 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Mockup interactivo del Bot WhatsApp + Dashboard cliente
+
+const conversacion = [
+  { tipo: "entrante", texto: "Hola, ¿abrís hoy domingo?", hora: "14:32", nombre: "Juan Pérez" },
+  { tipo: "bot", texto: "¡Hola Juan! Sí, los domingos abrimos de 13:00 a 17:00. Te esperamos.", hora: "14:32", auto: true },
+  { tipo: "entrante", texto: "Quiero reservar mesa para 4 personas a las 14h", hora: "14:33", nombre: "Juan Pérez" },
+  { tipo: "bot", texto: "¡Perfecto! Para 4 personas a las 14h hoy domingo. ¿Me das tu nombre completo y un teléfono donde te confirmemos?", hora: "14:33", auto: true, lead: true },
+  { tipo: "entrante", texto: "Juan Pérez, 666123456", hora: "14:34", nombre: "Juan Pérez" },
+  { tipo: "bot", texto: "Genial Juan, lo paso al equipo. Te confirman en 10 min por aquí mismo.", hora: "14:34", auto: true },
+];
+
+const leads = [
+  { nombre: "Juan Pérez", interes: "Reserva 4p · domingo 14h", estado: "Nuevo", tel: "+34 666 12 34 56", hora: "Hace 2 min" },
+  { nombre: "María González", interes: "Pregunta menú sin gluten", estado: "Resuelto bot", tel: "+34 611 22 33 44", hora: "Hace 1h" },
+  { nombre: "Carlos Ruiz", interes: "Evento privado 25 pers.", estado: "Pendiente humano", tel: "+34 622 33 44 55", hora: "Hace 3h" },
+  { nombre: "Sandra Molina", interes: "Reserva fin de semana", estado: "Confirmado", tel: "+34 633 44 55 66", hora: "Ayer" }
+];
+
+const metricas = [
+  { label: "Mensajes este mes", valor: "847", cambio: "+23%" },
+  { label: "% Autoresueltos", valor: "73%", cambio: "+8%" },
+  { label: "Leads capturados", valor: "34", cambio: "+12" },
+  { label: "Tiempo medio respuesta", valor: "12s", cambio: "vs 47min antes" }
+];
+---
+
+<Layout
+  title="Bot WhatsApp con IA — Mockup interactivo"
+  description="Cómo se ve realmente un bot WhatsApp con IA funcionando para tu negocio"
+>
+  <!-- Navbar back -->
+  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-slate-950/70 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 text-white font-bold hover:text-indigo-400 transition-colors">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Volver al inicio
+      </a>
+      <a href="/#contacto" class="px-4 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium transition-colors">
+        Reservar diagnóstico
+      </a>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="pt-32 pb-12 px-4 sm:px-6 hero-gradient">
+    <div class="max-w-5xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/30 mb-6">
+        <span class="text-2xl">💬</span>
+        <span class="text-sm text-indigo-300">Caso de uso #1 · Más demandado</span>
+      </div>
+      <h1 class="text-4xl sm:text-6xl font-display font-bold text-white leading-tight mb-4">
+        Bot WhatsApp con <span class="gradient-text">IA</span>
+      </h1>
+      <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+        Responde el 70% de mensajes en tu tono. Captura leads. Deriva lo importante.
+      </p>
+      <div class="mt-8 inline-flex flex-wrap gap-3 justify-center text-sm">
+        <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300">$1.500 implementación</span>
+        <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300">$200/mes mantenimiento</span>
+        <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300">Entrega en 2 semanas</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mockup: WhatsApp chat + Dashboard -->
+  <section class="py-16 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-display font-bold text-white text-center mb-12">
+        Cómo se ve funcionando
+      </h2>
+
+      <div class="grid lg:grid-cols-2 gap-8 items-start">
+
+        <!-- WhatsApp Phone Mockup -->
+        <div class="relative">
+          <div class="absolute -top-4 left-4 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold">
+            ✓ Cliente final
+          </div>
+          <div class="relative mx-auto max-w-sm rounded-[3rem] border-8 border-slate-800 bg-slate-900 shadow-2xl">
+            <!-- Phone header -->
+            <div class="bg-[#075e54] rounded-t-[2.5rem] px-4 py-3 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-white font-bold">TR</div>
+              <div class="flex-1">
+                <div class="text-white text-sm font-semibold">La Trattoria de Mario</div>
+                <div class="text-emerald-100 text-xs">en línea · responde al momento</div>
+              </div>
+            </div>
+
+            <!-- Chat -->
+            <div class="bg-[#e5ddd5] px-3 py-4 space-y-2 min-h-[500px]" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23e5ddd5%22 width=%22100%22 height=%22100%22/></svg>');">
+              {conversacion.map((msg) => (
+                <div class={`flex ${msg.tipo === 'bot' ? 'justify-start' : 'justify-end'}`}>
+                  <div class={`max-w-[80%] rounded-lg px-3 py-2 ${msg.tipo === 'bot' ? 'bg-white' : 'bg-[#dcf8c6]'} shadow-sm`}>
+                    <p class="text-slate-800 text-sm leading-relaxed">{msg.texto}</p>
+                    <div class="flex items-center justify-end gap-1 mt-1">
+                      {msg.auto && (
+                        <span class="text-[10px] text-indigo-600 font-medium">⚡ Auto</span>
+                      )}
+                      {msg.lead && (
+                        <span class="text-[10px] bg-orange-100 text-orange-700 px-1 rounded">🎯 Lead</span>
+                      )}
+                      <span class="text-[10px] text-slate-500">{msg.hora}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <!-- Input bar -->
+            <div class="bg-[#f0f0f0] rounded-b-[2.5rem] px-3 py-3 flex items-center gap-2">
+              <div class="flex-1 bg-white rounded-full px-4 py-2 text-slate-400 text-sm">Escribe un mensaje</div>
+              <div class="w-10 h-10 rounded-full bg-[#075e54] flex items-center justify-center text-white">→</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard cliente (Notion-style) -->
+        <div class="space-y-6">
+          <div class="relative">
+            <div class="absolute -top-4 left-4 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 text-xs font-bold">
+              ✓ Tu panel de control
+            </div>
+
+            <!-- Metrics cards -->
+            <div class="rounded-2xl bg-slate-900/50 border border-slate-800 p-6">
+              <h3 class="text-white font-semibold mb-4 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                Resumen del mes
+              </h3>
+              <div class="grid grid-cols-2 gap-3">
+                {metricas.map((m) => (
+                  <div class="rounded-lg bg-slate-800/50 border border-slate-700 p-4">
+                    <div class="text-2xl font-bold text-white">{m.valor}</div>
+                    <div class="text-xs text-slate-400 mt-1">{m.label}</div>
+                    <div class="text-xs text-emerald-400 mt-1 font-medium">{m.cambio}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <!-- Leads database -->
+          <div class="rounded-2xl bg-slate-900/50 border border-slate-800 overflow-hidden">
+            <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+              <h3 class="text-white font-semibold flex items-center gap-2">
+                🎯 Leads capturados
+                <span class="px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-300 text-xs">{leads.length}</span>
+              </h3>
+              <button class="text-xs text-indigo-400 hover:text-indigo-300">Ver todos →</button>
+            </div>
+            <div class="divide-y divide-slate-800">
+              {leads.map((lead, i) => (
+                <div class={`p-4 hover:bg-slate-800/30 transition-colors ${i === 0 ? 'bg-orange-500/5' : ''}`}>
+                  <div class="flex items-start justify-between gap-3">
+                    <div class="flex-1 min-w-0">
+                      <div class="flex items-center gap-2">
+                        <div class="text-sm font-medium text-white truncate">{lead.nombre}</div>
+                        {i === 0 && <span class="text-[10px] bg-orange-500/30 text-orange-300 px-1.5 py-0.5 rounded">NUEVO</span>}
+                      </div>
+                      <div class="text-xs text-slate-400 mt-0.5 truncate">{lead.interes}</div>
+                      <div class="text-xs text-slate-500 mt-1">{lead.tel} · {lead.hora}</div>
+                    </div>
+                    <div class={`px-2 py-1 rounded text-xs font-medium whitespace-nowrap
+                      ${lead.estado === 'Nuevo' ? 'bg-orange-500/20 text-orange-300' :
+                        lead.estado === 'Resuelto bot' ? 'bg-emerald-500/20 text-emerald-300' :
+                        lead.estado === 'Pendiente humano' ? 'bg-yellow-500/20 text-yellow-300' :
+                        'bg-indigo-500/20 text-indigo-300'}`}>
+                      {lead.estado}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stack técnico -->
+  <section class="py-16 px-4 sm:px-6 bg-slate-950/50">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-display font-bold text-white text-center mb-12">
+        Lo que pasa por debajo
+      </h2>
+
+      <div class="rounded-2xl bg-slate-900/50 border border-slate-800 p-8">
+        <pre class="text-sm text-slate-300 font-mono leading-relaxed overflow-x-auto"><code>{`Cliente final
+   ↓
+WhatsApp Business (Meta Cloud API)
+   ↓
+n8n Workflow (self-hosted)
+   ↓
+   ├──► Claude API (Sonnet 4.6, prompt caching)
+   │    └── System prompt con tus 30 FAQs + tono de marca
+   │
+   ├──► Notion (logs + leads + métricas)
+   │
+   └──► Email tuyo (si el bot deriva a humano)
+
+Coste operacional por cliente: ~€6-15/mes
+Lo que cobras al cliente: $200/mes (Basic)
+Margen: 92-97%`}</code></pre>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-4 mt-8">
+        <div class="rounded-xl bg-slate-900/50 border border-slate-800 p-4 text-center">
+          <div class="text-3xl mb-2">⚡</div>
+          <div class="text-white font-semibold">12 segundos</div>
+          <div class="text-xs text-slate-400 mt-1">Tiempo medio de respuesta</div>
+        </div>
+        <div class="rounded-xl bg-slate-900/50 border border-slate-800 p-4 text-center">
+          <div class="text-3xl mb-2">🌙</div>
+          <div class="text-white font-semibold">24/7</div>
+          <div class="text-xs text-slate-400 mt-1">Sin descansos ni vacaciones</div>
+        </div>
+        <div class="rounded-xl bg-slate-900/50 border border-slate-800 p-4 text-center">
+          <div class="text-3xl mb-2">🎯</div>
+          <div class="text-white font-semibold">73% auto-resueltos</div>
+          <div class="text-xs text-slate-400 mt-1">El 27% restante: a ti con contexto</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 px-4 sm:px-6 hero-gradient">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl sm:text-5xl font-display font-bold text-white mb-6">
+        ¿Lo quieres para tu negocio?
+      </h2>
+      <p class="text-xl text-slate-300 mb-8">
+        Empezamos con un diagnóstico de $300. Si no encuentras valor, te devuelvo el dinero.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/#contacto" class="px-8 py-4 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-semibold transition-all hover:scale-105 card-glow-strong">
+          Reservar diagnóstico (desde $300)
+        </a>
+        <a href="/" class="px-8 py-4 rounded-xl border border-slate-700 hover:border-slate-600 text-slate-300 font-medium">
+          Ver otras soluciones
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="border-t border-slate-800 py-8 px-4 text-center text-xs text-slate-600">
+    Agencia IA Madrid Este · Mockup interactivo del caso de uso Bot WhatsApp
+  </footer>
+</Layout>

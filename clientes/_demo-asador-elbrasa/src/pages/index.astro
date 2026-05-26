@@ -1,0 +1,125 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Menu from '../components/Menu.astro';
+import About from '../components/About.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Contact from '../components/Contact.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+
+// =============================================
+// DEMO ASADOR — El Brasa Steakhouse Soto
+// Sub-nicho: asador / steakhouse de barrio nuevo (Soto del Henares)
+// =============================================
+
+const datosRestaurante = {
+  nombre: "El Brasa Steakhouse",
+  tagline: "Carne madurada al fuego de encina en Soto del Henares. Cortes de raza, sin atajos.",
+  telefono: "+34 916 78 90 12",
+  whatsapp: "+34611223344",
+  email: "reservas@elbrasasoto.com",
+  direccion: "Avenida del Río Henares 12, 28850 Torrejón de Ardoz, Madrid",
+  imagenHero: "https://images.unsplash.com/photo-1544025162-d76694265947?w=1920&q=80",
+  googleMapsEmbed: "https://www.google.com/maps?q=Soto+del+Henares+Torrejon+de+Ardoz&z=15&output=embed"
+};
+
+const horario = [
+  { dias: "Martes a Jueves", horas: "13:30 - 16:00 · 20:30 - 23:30" },
+  { dias: "Viernes y Sábado", horas: "13:30 - 16:30 · 20:30 - 00:00" },
+  { dias: "Domingo", horas: "13:30 - 17:00" },
+  { dias: "Lunes", horas: "Cerrado" }
+];
+
+const menu = [
+  {
+    titulo: "Para empezar",
+    platos: [
+      { nombre: "Tabla del Brasa", descripcion: "Jamón ibérico de bellota, chorizo de Cantimpalos y queso curado de oveja.", precio: "18€", destacado: true, imagen: "https://images.unsplash.com/photo-1626200419199-391ae4be7a41?w=400&q=80" },
+      { nombre: "Croquetas de cocido", descripcion: "Receta de la abuela, cremosas por dentro y crujientes por fuera. 6 ud.", precio: "9€" },
+      { nombre: "Pimientos del Padrón", descripcion: "A la plancha con sal en escamas. Aviso: unos pican, otros no.", precio: "7€" },
+      { nombre: "Ensaladilla casera", descripcion: "Patata, atún del Cantábrico, mayonesa de la casa y aceitunas.", precio: "8€" }
+    ]
+  },
+  {
+    titulo: "De la brasa",
+    platos: [
+      { nombre: "Chuletón de buey madurado 45 días", descripcion: "Lomo alto de raza Rubia Gallega, madurado en cámara. Precio por kg (mínimo 800g).", precio: "65€/kg", destacado: true, imagen: "https://images.unsplash.com/photo-1558030006-450675393462?w=400&q=80" },
+      { nombre: "Presa ibérica", descripcion: "Cerdo ibérico de bellota a la brasa. Punto al gusto.", precio: "22€" },
+      { nombre: "Costillar de ternera", descripcion: "12 horas a baja temperatura, terminado en brasa. Cae del hueso solo.", precio: "24€", destacado: true },
+      { nombre: "Solomillo a la pimienta verde", descripcion: "Solomillo de vaca con salsa de pimienta verde y patata trufada.", precio: "26€" },
+      { nombre: "Cordero lechal asado", descripcion: "Asado en horno de leña 4 horas. Ración completa (½ cordero).", precio: "28€" }
+    ]
+  },
+  {
+    titulo: "Guarniciones",
+    platos: [
+      { nombre: "Patatas a la importancia", descripcion: "Patata gallega frita con pimentón de la Vera.", precio: "6€" },
+      { nombre: "Tomate de la huerta", descripcion: "Tomate raf de temporada con aceite de oliva virgen extra.", precio: "7€" },
+      { nombre: "Setas de temporada al ajillo", descripcion: "Variadas según mercado, salteadas con ajo y perejil.", precio: "9€" }
+    ]
+  },
+  {
+    titulo: "Para terminar",
+    platos: [
+      { nombre: "Tarta de queso al horno", descripcion: "Receta vasca, sin base, cuajada al punto justo.", precio: "7€", destacado: true },
+      { nombre: "Sorbete de limón al cava", descripcion: "Sorbete artesano con un chorrito de cava brut.", precio: "6€" }
+    ]
+  }
+];
+
+const testimonios = [
+  { nombre: "Antonio Vega", texto: "El chuletón es de los mejores que he comido en Madrid. Maduración perfecta, brasa de verdad, y un servicio que sabe lo que vende. Volveremos seguro.", estrellas: 5, fuente: "Google" },
+  { nombre: "Sandra Molina", texto: "Vinimos un domingo en familia. El costillar es un escándalo, se deshace solo. Las patatas y el tomate, sencillos pero de 10. Buen precio para la calidad.", estrellas: 5, fuente: "TripAdvisor" },
+  { nombre: "Javier Ruiz", texto: "Asador de los que ya quedan pocos. Carne de raza, brasa de encina y un equipo que te trata como en casa. La tarta de queso vale el viaje.", estrellas: 5, fuente: "Google" }
+];
+---
+
+<Layout
+  title={`${datosRestaurante.nombre} — Asador en Torrejón de Ardoz`}
+  description={`${datosRestaurante.tagline}. Reserva mesa en El Brasa, asador con carne madurada en Soto del Henares.`}
+>
+  <Hero
+    nombre={datosRestaurante.nombre}
+    tagline={datosRestaurante.tagline}
+    ctaTexto="Reservar mesa"
+    ctaUrl="#contacto"
+    imagenFondo={datosRestaurante.imagenHero}
+  />
+
+  <Menu categorias={menu} />
+
+  <About
+    titulo="Brasa de encina. Carne de raza. Sin atajos."
+    parrafos={[
+      "Abrimos en 2019 con una obsesión: traer a Soto del Henares un asador del nivel de los grandes de Madrid, pero a precio de barrio.",
+      "Trabajamos solo con tres ganaderías que conocemos personalmente. Maduramos cada pieza en cámara propia un mínimo de 30 días. La brasa es de encina y nadie cocina ahí salvo nuestro jefe de parrilla. Lo que llega a tu mesa, lo controlamos nosotros de la primera mecha al último corte."
+    ]}
+    imagen="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80"
+    imagenAlt="Interior del asador con parrilla a la vista"
+    datos={[
+      { label: "Maduración mínima", valor: "30 días" },
+      { label: "Ganaderías propias", valor: "3" },
+      { label: "Reseñas 5★", valor: "480+" }
+    ]}
+  />
+
+  <Testimonials testimonios={testimonios} />
+
+  <Contact
+    direccion={datosRestaurante.direccion}
+    telefono={datosRestaurante.telefono}
+    email={datosRestaurante.email}
+    horario={horario}
+    googleMapsEmbed={datosRestaurante.googleMapsEmbed}
+  />
+
+  <WhatsAppFloat
+    numero={datosRestaurante.whatsapp}
+    mensaje={`Hola, quiero reservar mesa en ${datosRestaurante.nombre}`}
+  />
+
+  <footer class="bg-stone-900 text-stone-300 py-10 px-4 text-center">
+    <p class="text-sm">© {new Date().getFullYear()} {datosRestaurante.nombre}. Todos los derechos reservados.</p>
+    <p class="text-xs mt-2 text-stone-500">Web creada con cariño · <a href="#" class="hover:text-brand-400">Política de privacidad</a></p>
+  </footer>
+</Layout>

@@ -1,0 +1,79 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const { title, description, image = '/og-image.jpg' } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url)} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.url)} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet" />
+
+    <!-- JSON-LD Schema (Restaurant - Steakhouse) -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BarbecueRestaurant",
+      "name": "El Brasa Steakhouse",
+      "image": new URL(image, Astro.url).toString(),
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Avenida del Río Henares 12",
+        "addressLocality": "Torrejón de Ardoz",
+        "postalCode": "28850",
+        "addressRegion": "Madrid",
+        "addressCountry": "ES"
+      },
+      "telephone": "+34 916 78 90 12",
+      "servesCuisine": ["Spanish", "Steak", "Grill"],
+      "priceRange": "$$$",
+      "openingHours": [
+        "Tu-Th 13:30-16:00",
+        "Tu-Th 20:30-23:30",
+        "Fr-Sa 13:30-16:30",
+        "Fr-Sa 20:30-00:00",
+        "Su 13:30-17:00"
+      ],
+      "acceptsReservations": true,
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 40.4730,
+        "longitude": -3.4655
+      }
+    })} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

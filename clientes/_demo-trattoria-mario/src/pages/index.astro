@@ -1,0 +1,122 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Menu from '../components/Menu.astro';
+import About from '../components/About.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Contact from '../components/Contact.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+
+// =============================================
+// DATOS DEL CLIENTE — Claude Code rellenará esto desde el brief
+// =============================================
+
+const datosRestaurante = {
+  nombre: "La Trattoria de Mario",
+  tagline: "Cocina italiana auténtica en Torrejón de Ardoz. Pasta fresca hecha cada mañana.",
+  telefono: "+34 916 12 34 56",
+  whatsapp: "+34600123456",
+  email: "reservas@latrattoriademario.es",
+  direccion: "Plaza Mayor 4, 28850 Torrejón de Ardoz, Madrid",
+  imagenHero: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=80",
+  googleMapsEmbed: "https://www.google.com/maps?q=Plaza+Mayor+Torrejon+de+Ardoz&z=16&output=embed"
+};
+
+const horario = [
+  { dias: "Lunes a Jueves", horas: "13:00 - 16:00 · 20:00 - 23:30" },
+  { dias: "Viernes y Sábado", horas: "13:00 - 16:30 · 20:00 - 00:30" },
+  { dias: "Domingo", horas: "13:00 - 17:00" }
+];
+
+const menu = [
+  {
+    titulo: "Entrantes",
+    platos: [
+      { nombre: "Burrata Pugliese", descripcion: "Burrata cremosa de Apulia, tomates cherry confitados y albahaca fresca.", precio: "12€", destacado: true, imagen: "https://images.unsplash.com/photo-1572441713132-c542fc4fe282?w=400&q=80" },
+      { nombre: "Carpaccio de ternera", descripcion: "Lonchas finas de ternera, parmesano, rúcula y aceite de trufa.", precio: "14€" },
+      { nombre: "Tabla de embutidos italianos", descripcion: "Prosciutto, salami, mortadela y quesos curados.", precio: "16€" },
+      { nombre: "Bruschetta tradicional", descripcion: "Pan tostado con tomate, ajo, albahaca y aceite de oliva virgen extra.", precio: "8€" }
+    ]
+  },
+  {
+    titulo: "Pastas frescas",
+    platos: [
+      { nombre: "Tagliatelle al ragú", descripcion: "Pasta fresca con ragú de ternera cocinado 6 horas.", precio: "14€", destacado: true, imagen: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400&q=80" },
+      { nombre: "Ravioli de ricotta y espinacas", descripcion: "Rellenos hechos a mano, salsa de mantequilla y salvia.", precio: "15€" },
+      { nombre: "Spaghetti carbonara", descripcion: "Receta romana original: guanciale, huevo, pecorino y pimienta negra.", precio: "13€" },
+      { nombre: "Lasagna della nonna", descripcion: "Lasagna casera con bechamel y ragú de la receta de la abuela.", precio: "14€" }
+    ]
+  },
+  {
+    titulo: "Pizzas al horno de leña",
+    platos: [
+      { nombre: "Margherita D.O.P.", descripcion: "Mozzarella de búfala, tomate San Marzano, albahaca.", precio: "12€" },
+      { nombre: "Quattro formaggi", descripcion: "Mozzarella, gorgonzola, parmesano y taleggio.", precio: "14€" },
+      { nombre: "Diavola", descripcion: "Salame piccante, mozzarella, aceite de chile.", precio: "13€" }
+    ]
+  },
+  {
+    titulo: "Postres",
+    platos: [
+      { nombre: "Tiramisú de la casa", descripcion: "Receta tradicional con mascarpone, café espresso y cacao.", precio: "7€", destacado: true },
+      { nombre: "Panna cotta", descripcion: "Crema cocida con coulis de frutos rojos.", precio: "6€" }
+    ]
+  }
+];
+
+const testimonios = [
+  { nombre: "María González", texto: "La mejor pasta fresca que he probado fuera de Italia. El servicio impecable y el ambiente es como estar en una trattoria romana.", estrellas: 5, fuente: "Google" },
+  { nombre: "Carlos Ruiz", texto: "Volvimos por tercera vez en un mes. El tiramisú es legendario y los precios son honestos para la calidad que ofrecen.", estrellas: 5, fuente: "TripAdvisor" },
+  { nombre: "Laura Sánchez", texto: "Mario te trata como de la familia. Reservé para una cena de cumpleaños y nos sorprendieron con un detalle. Volveré seguro.", estrellas: 5, fuente: "Google" }
+];
+---
+
+<Layout
+  title={`${datosRestaurante.nombre} — ${datosRestaurante.tagline}`}
+  description={`Reserva mesa en ${datosRestaurante.nombre}. ${datosRestaurante.tagline}`}
+>
+  <Hero
+    nombre={datosRestaurante.nombre}
+    tagline={datosRestaurante.tagline}
+    ctaTexto="Reservar mesa"
+    ctaUrl="#contacto"
+    imagenFondo={datosRestaurante.imagenHero}
+  />
+
+  <Menu categorias={menu} />
+
+  <About
+    titulo="Una historia que se sirve en cada plato"
+    parrafos={[
+      "Abrimos en 2008 con una idea sencilla: cocinar como lo hacía la nonna en su pueblo de la Toscana. Sin atajos, con ingredientes que llegan directamente de Italia cada semana.",
+      "Hoy seguimos haciendo la pasta a mano cada mañana, encendiendo el horno de leña al amanecer y eligiendo personalmente cada tomate, cada queso, cada gota de aceite. Porque la buena comida no se improvisa."
+    ]}
+    imagen="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80"
+    imagenAlt="Interior del restaurante"
+    datos={[
+      { label: "Años de tradición", valor: "16+" },
+      { label: "Platos en carta", valor: "32" },
+      { label: "Reseñas 5★", valor: "1.200+" }
+    ]}
+  />
+
+  <Testimonials testimonios={testimonios} />
+
+  <Contact
+    direccion={datosRestaurante.direccion}
+    telefono={datosRestaurante.telefono}
+    email={datosRestaurante.email}
+    horario={horario}
+    googleMapsEmbed={datosRestaurante.googleMapsEmbed}
+  />
+
+  <WhatsAppFloat
+    numero={datosRestaurante.whatsapp}
+    mensaje={`Hola, quiero reservar mesa en ${datosRestaurante.nombre}`}
+  />
+
+  <footer class="bg-stone-900 text-stone-300 py-10 px-4 text-center">
+    <p class="text-sm">© {new Date().getFullYear()} {datosRestaurante.nombre}. Todos los derechos reservados.</p>
+    <p class="text-xs mt-2 text-stone-500">Web creada con cariño · <a href="#" class="hover:text-brand-400">Política de privacidad</a></p>
+  </footer>
+</Layout>

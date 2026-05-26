@@ -1,0 +1,48 @@
+---
+export interface Props {
+  nombre: string;
+  tagline: string;
+  ctaTexto: string;
+  ctaUrl: string;
+  imagenFondo: string;
+}
+
+const { nombre, tagline, ctaTexto, ctaUrl, imagenFondo } = Astro.props;
+---
+
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <img
+      src={imagenFondo}
+      alt={`Vista de ${nombre}`}
+      class="w-full h-full object-cover"
+      loading="eager"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+  </div>
+
+  <div class="relative z-10 text-center text-white px-4 max-w-4xl">
+    <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight drop-shadow-2xl">
+      {nombre}
+    </h1>
+    <p class="text-xl md:text-2xl mb-10 text-stone-100 max-w-2xl mx-auto drop-shadow-lg">
+      {tagline}
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href={ctaUrl} class="btn-primary text-lg">
+        {ctaTexto}
+      </a>
+      <a href="#menu" class="btn-outline text-lg bg-white/10 backdrop-blur border-white text-white hover:bg-white hover:text-brand-700">
+        Ver carta
+      </a>
+    </div>
+  </div>
+
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+    <a href="#menu" class="text-white" aria-label="Ver más">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+      </svg>
+    </a>
+  </div>
+</section>

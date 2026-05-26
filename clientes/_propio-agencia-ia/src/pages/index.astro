@@ -1,0 +1,526 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// =============================================
+// LANDING PÚBLICA — Agencia IA Madrid Este
+// Diseño dark mode tech con cards pricing prominentes
+// =============================================
+
+const datos = {
+  nombre: "Agencia IA Madrid Este",
+  tagline: "Automatizo procesos de tu negocio con IA en 2 semanas",
+  subtagline: "Diagnóstico claro, precio cerrado, resultados medibles. Sin promesas vacías.",
+  whatsapp: "+34600123456",
+  email: "hola@agenciaia-madridest.com",
+  calendly: "https://calendly.com/tu-handle/diagnostico-30min"
+};
+
+const tiers = [
+  {
+    label: "DIAGNÓSTICO",
+    nombre: "Diagnóstico",
+    precio: "$300 — $700",
+    precioDetalle: "Según complejidad",
+    duracion: "3-5 días de trabajo",
+    barra: "Se percibe como inversión baja",
+    color: "indigo",
+    items: [
+      "Llamada kickoff 45 min: mapeo procesos manuales",
+      "Auditoría escrita: 3-5 procesos priorizados por ROI",
+      "Demo en vivo con tus datos reales",
+      "Propuesta de implementación al final",
+      "Garantía: devolución 100% si no aporta valor"
+    ],
+    mathLabel: "X diagnósticos/mes",
+    mathValor: "$600 - $1.400"
+  },
+  {
+    label: "IMPLEMENTACIÓN",
+    nombre: "Implementación",
+    precio: "$1.500 — $5.000",
+    precioDetalle: "Por proyecto · Precio cerrado",
+    duracion: "2-4 semanas",
+    barra: "El margen real está aquí",
+    color: "orange",
+    destacado: true,
+    items: [
+      "Una automatización concreta entregada",
+      "Sistema en producción, no demos",
+      "Documentación + handover de 1 hora",
+      "2 rondas de revisiones incluidas",
+      "30 días de garantía técnica"
+    ],
+    mathLabel: "1 implementación/mes",
+    mathValor: "$1.500 - $5.000"
+  },
+  {
+    label: "MANTENIMIENTO MENSUAL",
+    nombre: "Mantenimiento",
+    precio: "$200+",
+    precioDetalle: "Por mes · Cancelable",
+    duracion: "Continuo",
+    barra: "Por cada cliente que implementas, puedes ofrecer mantenimiento recurrente",
+    color: "emerald",
+    items: [
+      "Monitorización 24/7 del workflow",
+      "2h de soporte/mes (acumulables)",
+      "Ajustes prompts según feedback",
+      "Reporte mensual con métricas reales",
+      "WhatsApp directo en horario laboral"
+    ],
+    mathLabel: "10 clientes en mantenimiento",
+    mathValor: "$2.000/mes recurrente"
+  }
+];
+
+const casosUso = [
+  {
+    icono: "💬",
+    titulo: "Bot WhatsApp con IA",
+    descripcion: "Responde el 70% de los mensajes en tu tono de marca. Captura leads. Deriva lo importante.",
+    sector: "Hostelería · Clínicas",
+    link: "/casos/bot-whatsapp"
+  },
+  {
+    icono: "📝",
+    titulo: "Generador de contenidos",
+    descripcion: "4 posts + 1 reel + 1 carrusel semanal. Tú apruebas, el sistema produce.",
+    sector: "PYMEs servicios",
+    link: "/casos/generador-contenidos"
+  },
+  {
+    icono: "📄",
+    titulo: "Propuestas automatizadas",
+    descripcion: "Tu propuesta personalizada en 5 minutos, no 3 horas. Con casos relevantes.",
+    sector: "B2B mid-market",
+    link: "/casos/propuestas"
+  },
+  {
+    icono: "⚙️",
+    titulo: "Workflows internos",
+    descripcion: "Onboarding clientes, reporting, integraciones. Reduce 10-20h/semana del equipo.",
+    sector: "Cualquier sector",
+    link: "/#contacto"
+  }
+];
+
+const faqs = [
+  {
+    q: "¿Y si soy una empresa muy pequeña?",
+    a: "Cuanto más pequeño tu negocio, MÁS aprovechable es la IA. Un sprint de 2 semanas + tu decisión = automatización funcionando. En empresas grandes esto requiere comités."
+  },
+  {
+    q: "¿En qué se diferencia de otras agencias IA?",
+    a: "Vengo de 8 años de arquitectura cloud enterprise (Mercedes-Benz). Cobro precios fijos en lugar de 'depende'. Hago un diagnóstico previo antes de implementar. Y si no aporta valor, devuelvo el dinero."
+  },
+  {
+    q: "¿Cuánto tarda en ver retorno?",
+    a: "ROI típico: 6-8 semanas para bot WhatsApp. 8-12 semanas para generador contenidos. Implementaciones más complejas: 12-16 semanas. Esto se calcula explícitamente en el diagnóstico."
+  },
+  {
+    q: "¿Y si quiero cancelar el mantenimiento?",
+    a: "Permanencia mínima 3 meses, después cancelable con 15 días de aviso. Sin penalización."
+  },
+  {
+    q: "¿Trabajas con clientes fuera de Madrid Este?",
+    a: "Los primeros 6 meses solo Madrid Este (Torrejón, Alcalá, Coslada, San Fernando). Después amplío selectivamente."
+  }
+];
+---
+
+<Layout
+  title={`${datos.nombre} — ${datos.tagline}`}
+  description={datos.subtagline}
+>
+  <!-- ========== NAVBAR ========== -->
+  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-slate-950/70 border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2 text-white font-bold">
+        <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-sm">AI</span>
+        <span class="hidden sm:inline">Agencia IA Madrid Este</span>
+        <span class="sm:hidden">Agencia IA</span>
+      </a>
+      <a href="#contacto" class="px-4 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium transition-colors">
+        Reservar diagnóstico
+      </a>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="relative pt-32 pb-20 px-4 sm:px-6 hero-gradient bg-grid overflow-hidden">
+    <div class="max-w-5xl mx-auto text-center relative z-10 fade-in">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/30 mb-6">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="text-sm text-indigo-300">Aceptando 3 clientes nuevos · Madrid Este</span>
+      </div>
+
+      <h1 class="text-5xl sm:text-6xl lg:text-7xl font-display font-bold text-white leading-tight mb-6">
+        Automatizo procesos<br/>
+        de tu negocio con <span class="gradient-text">IA</span>
+      </h1>
+
+      <p class="text-xl sm:text-2xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed">
+        Diagnóstico claro. Precio cerrado. Resultados medibles en 2 semanas.<br/>
+        <span class="text-slate-500 text-lg">Sin promesas vacías ni "transformación digital" de 18 meses.</span>
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+        <a href="#contacto" class="px-8 py-4 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-semibold transition-all hover:scale-105 card-glow-strong">
+          Reservar diagnóstico (desde $300)
+        </a>
+        <a href="#proceso" class="px-8 py-4 rounded-xl border border-slate-700 hover:border-slate-600 text-slate-300 font-medium transition-colors">
+          Ver cómo funciona
+        </a>
+      </div>
+
+      <!-- Stats bar -->
+      <div class="grid grid-cols-3 gap-4 max-w-2xl mx-auto pt-12 border-t border-slate-800">
+        <div>
+          <div class="text-3xl font-bold text-white">8+</div>
+          <div class="text-sm text-slate-500 mt-1">Años cloud enterprise</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-white">2 sem</div>
+          <div class="text-sm text-slate-500 mt-1">Entrega típica</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-white">100%</div>
+          <div class="text-sm text-slate-500 mt-1">Devolución si no funciona</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating decorative elements -->
+    <div class="absolute top-1/4 left-10 w-24 h-24 rounded-full bg-indigo-500/10 blur-3xl animate-float"></div>
+    <div class="absolute bottom-1/4 right-10 w-32 h-32 rounded-full bg-purple-500/10 blur-3xl animate-float" style="animation-delay: 2s"></div>
+  </section>
+
+  <!-- ========== PRICING / EMBUDO ========== -->
+  <section id="proceso" class="py-24 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl sm:text-5xl font-display font-bold text-white mb-4">
+          El embudo de 3 pasos
+        </h2>
+        <p class="text-xl text-slate-400 max-w-2xl mx-auto">
+          Sin sorpresas. Cada paso tiene precio cerrado y plazo definido.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {tiers.map((tier) => {
+          const isOrange = tier.color === 'orange';
+          const isEmerald = tier.color === 'emerald';
+          const isIndigo = tier.color === 'indigo';
+
+          const borderClass = isOrange
+            ? 'border-orange-500/40 card-glow-strong'
+            : isEmerald
+              ? 'border-emerald-500/30'
+              : 'border-indigo-500/30';
+
+          const labelClass = isOrange
+            ? 'text-orange-400'
+            : isEmerald
+              ? 'text-emerald-400'
+              : 'text-indigo-400';
+
+          const priceClass = isOrange
+            ? 'text-orange-400'
+            : isEmerald
+              ? 'text-emerald-400'
+              : 'text-white';
+
+          const barClass = isOrange
+            ? 'bg-orange-500/10 border-orange-500/30 text-orange-300'
+            : isEmerald
+              ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
+              : 'bg-indigo-500/10 border-indigo-500/30 text-indigo-300';
+
+          return (
+            <div class={`relative rounded-2xl bg-slate-900/50 backdrop-blur-sm border ${borderClass} p-8 transition-all hover:scale-[1.02]`}>
+              {tier.destacado && (
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-orange-500 text-white text-xs font-bold uppercase tracking-wider">
+                  El margen real
+                </div>
+              )}
+
+              <div class={`text-xs font-bold tracking-widest ${labelClass} mb-2`}>
+                {tier.label}
+              </div>
+              <h3 class="text-2xl font-display font-bold text-white mb-1">
+                {tier.nombre}
+              </h3>
+              <div class={`text-4xl sm:text-5xl font-bold ${priceClass} mb-1 leading-tight`}>
+                {tier.precio}
+              </div>
+              <div class="text-sm text-slate-500 mb-2">
+                {tier.precioDetalle}
+              </div>
+              <div class="text-sm text-slate-400 mb-6">
+                {tier.duracion}
+              </div>
+
+              <div class={`px-4 py-3 rounded-lg border ${barClass} text-sm font-medium mb-6`}>
+                {tier.barra}
+              </div>
+
+              <ul class="space-y-3 mb-8">
+                {tier.items.map((item) => (
+                  <li class="flex items-start gap-3 text-sm text-slate-300">
+                    <svg class="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div class="pt-6 border-t border-slate-800">
+                <div class={`px-3 py-2 rounded-lg ${barClass} text-xs font-medium text-center`}>
+                  {tier.mathLabel} = <strong>{tier.mathValor}</strong>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div class="text-center mt-12 max-w-3xl mx-auto space-y-3">
+        <p class="text-slate-400">
+          Si tras el Diagnóstico decides avanzar a Implementación, su coste se descuenta. Tu inversión total empieza en <span class="text-white font-semibold">$1.500</span>.
+        </p>
+        <p class="text-sm text-slate-500 italic">
+          Precios de lanzamiento: arrancamos en el mínimo del rango ($300 / $1.500 / $200) para los primeros 5 clientes. Después subimos a media del rango.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CASOS DE USO ========== -->
+  <section class="py-24 px-4 sm:px-6 bg-slate-950/50">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl sm:text-5xl font-display font-bold text-white mb-4">
+          Qué puedes automatizar
+        </h2>
+        <p class="text-xl text-slate-400 max-w-2xl mx-auto">
+          Casos reales que estoy entregando a PYMEs locales.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-6">
+        {casosUso.map((caso) => (
+          <a href={caso.link} class="group rounded-2xl bg-slate-900/50 backdrop-blur-sm border border-slate-800 p-6 hover:border-indigo-500/40 hover:bg-slate-900/70 transition-all block">
+            <div class="text-4xl mb-4">{caso.icono}</div>
+            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors">
+              {caso.titulo}
+            </h3>
+            <p class="text-slate-400 mb-4">
+              {caso.descripcion}
+            </p>
+            <div class="flex items-center justify-between">
+              <div class="text-xs text-indigo-400 font-medium uppercase tracking-wider">
+                {caso.sector}
+              </div>
+              <div class="text-sm text-slate-500 group-hover:text-indigo-400 transition-colors flex items-center gap-1">
+                Ver mockup
+                <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CÓMO FUNCIONA ========== -->
+  <section class="py-24 px-4 sm:px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl sm:text-5xl font-display font-bold text-white mb-4">
+          Cómo trabajamos juntos
+        </h2>
+        <p class="text-xl text-slate-400 max-w-2xl mx-auto">
+          Sin reuniones eternas. Sin PowerPoints. Pasos claros.
+        </p>
+      </div>
+
+      <div class="space-y-6">
+        <div class="flex gap-6 p-6 rounded-2xl bg-slate-900/30 border border-slate-800">
+          <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-indigo-400 font-bold text-xl">1</div>
+          <div>
+            <h3 class="text-xl font-bold text-white mb-2">Llamada de 20 minutos (gratis)</h3>
+            <p class="text-slate-400">Cuéntame tu negocio. Te digo si mi servicio te encaja o no. Si no encaja, te recomiendo a otro y nos despedimos en buena onda.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-6 p-6 rounded-2xl bg-slate-900/30 border border-slate-800">
+          <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-indigo-400 font-bold text-xl">2</div>
+          <div>
+            <h3 class="text-xl font-bold text-white mb-2">Diagnóstico ($300 — $700, 3-5 días)</h3>
+            <p class="text-slate-400">Identifico tus 3-5 procesos más automatizables. Te entrego un documento con análisis cuantitativo y un quick-win demo con tus datos reales. Si no aporta valor: devolución total.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-6 p-6 rounded-2xl bg-slate-900/30 border border-slate-800">
+          <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-orange-500/20 border border-orange-500/40 flex items-center justify-center text-orange-400 font-bold text-xl">3</div>
+          <div>
+            <h3 class="text-xl font-bold text-white mb-2">Implementación ($1.500 — $5.000, 2-4 semanas)</h3>
+            <p class="text-slate-400">Construyo, despliegue, documento. 50% al firmar, 50% a la entrega validada. 2 rondas de revisiones incluidas + 30 días de garantía técnica.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-6 p-6 rounded-2xl bg-slate-900/30 border border-slate-800">
+          <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold text-xl">4</div>
+          <div>
+            <h3 class="text-xl font-bold text-white mb-2">Mantenimiento ($200+/mes, opcional)</h3>
+            <p class="text-slate-400">Monitorizo el sistema, ajusto prompts, te paso reporte mensual. Suscripción Stripe cancelable con 15 días de aviso tras los 3 primeros meses.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section class="py-24 px-4 sm:px-6 bg-slate-950/50">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="text-sm text-indigo-400 font-bold tracking-widest uppercase mb-3">Sobre mí</div>
+          <h2 class="text-4xl sm:text-5xl font-display font-bold text-white mb-6">
+            Background técnico real.<br/>
+            <span class="text-slate-500">No otro consultor reciclado.</span>
+          </h2>
+          <div class="space-y-4 text-slate-300 leading-relaxed">
+            <p>
+              Llevo <strong class="text-white">8 años construyendo infraestructura cloud</strong> para grandes empresas. Mi trabajo principal es en <strong class="text-white">Mercedes-Benz</strong>, donde mantengo sistemas que mueven millones de euros.
+            </p>
+            <p>
+              El mismo rigor técnico que aplico a infraestructura enterprise, ahora a automatizaciones reales para PYMEs locales.
+            </p>
+            <p>
+              Mi cliente típico es un negocio de 3-20 empleados en Madrid Este que pierde 10-20 horas/semana en tareas que la IA hace al 80%. Yo identifico cuáles, las construyo, y las mantengo.
+            </p>
+            <p class="text-slate-400 text-sm italic">
+              Sin PowerPoints de 40 slides. Sin "transformación digital" abstracta. Solo automatizaciones concretas que ahorran horas reales.
+            </p>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <div class="rounded-2xl bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/30 p-6">
+            <div class="text-4xl font-bold text-white mb-2">Mercedes-Benz</div>
+            <div class="text-indigo-300 text-sm">Cloud arquitecto enterprise · 8 años</div>
+          </div>
+          <div class="rounded-2xl bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 border border-emerald-500/30 p-6">
+            <div class="text-4xl font-bold text-white mb-2">Madrid Este</div>
+            <div class="text-emerald-300 text-sm">Torrejón · Alcalá · Coslada · San Fernando</div>
+          </div>
+          <div class="rounded-2xl bg-gradient-to-br from-orange-500/10 to-yellow-500/10 border border-orange-500/30 p-6">
+            <div class="text-4xl font-bold text-white mb-2">2 semanas</div>
+            <div class="text-orange-300 text-sm">De diagnóstico a sistema en producción</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section class="py-24 px-4 sm:px-6">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl sm:text-5xl font-display font-bold text-white mb-4">
+          Preguntas que suelen hacerme
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="group rounded-xl bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition-colors">
+            <summary class="cursor-pointer p-6 flex items-center justify-between gap-4 list-none">
+              <h3 class="text-lg font-semibold text-white">{faq.q}</h3>
+              <svg class="w-5 h-5 text-slate-500 group-open:rotate-180 transition-transform flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </summary>
+            <div class="px-6 pb-6 text-slate-400 leading-relaxed">
+              {faq.a}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA FINAL ========== -->
+  <section id="contacto" class="py-24 px-4 sm:px-6 relative overflow-hidden">
+    <div class="absolute inset-0 hero-gradient opacity-50"></div>
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <h2 class="text-4xl sm:text-6xl font-display font-bold text-white mb-6">
+        ¿Hablamos?
+      </h2>
+      <p class="text-xl text-slate-300 max-w-2xl mx-auto mb-10">
+        20 minutos de llamada. Te cuento sin filtros si tu negocio encaja con mi servicio. Si no encaja, te recomiendo a otro.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+        <a href={datos.calendly} target="_blank" rel="noopener" class="px-8 py-4 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-semibold transition-all hover:scale-105 card-glow-strong">
+          Agendar llamada (20 min)
+        </a>
+        <a href={`https://wa.me/${datos.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent('Hola, quiero saber más sobre el diagnóstico de automatización')}`} target="_blank" rel="noopener" class="px-8 py-4 rounded-xl border border-slate-700 hover:border-emerald-500/50 hover:bg-emerald-500/5 text-slate-300 font-medium transition-all">
+          <span class="inline-flex items-center gap-2">
+            <svg class="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            WhatsApp directo
+          </span>
+        </a>
+      </div>
+
+      <div class="inline-flex items-center gap-2 text-sm text-slate-500">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+        </svg>
+        <span>Respuesta en menos de 4h en horario laboral</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="border-t border-slate-800 py-12 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid sm:grid-cols-3 gap-8 mb-8">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-sm font-bold">AI</span>
+            <span class="font-bold text-white">Agencia IA Madrid Este</span>
+          </div>
+          <p class="text-sm text-slate-500 leading-relaxed">
+            Automatización con IA para PYMEs del corredor Madrid-Henares. Diagnóstico, implementación, mantenimiento.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-3 text-sm">Servicios</h4>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li><a href="#proceso" class="hover:text-indigo-400 transition-colors">Diagnóstico ($300 — $700)</a></li>
+            <li><a href="#proceso" class="hover:text-indigo-400 transition-colors">Implementación ($1.500 — $5.000)</a></li>
+            <li><a href="#proceso" class="hover:text-indigo-400 transition-colors">Mantenimiento ($200+/mes)</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-3 text-sm">Contacto</h4>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li><a href={`mailto:${datos.email}`} class="hover:text-indigo-400 transition-colors">{datos.email}</a></li>
+            <li><a href={`https://wa.me/${datos.whatsapp.replace(/\D/g, '')}`} target="_blank" class="hover:text-indigo-400 transition-colors">WhatsApp directo</a></li>
+            <li class="text-slate-500">Torrejón de Ardoz · Madrid</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pt-8 border-t border-slate-800 text-center text-xs text-slate-600">
+        © {new Date().getFullYear()} Agencia IA Madrid Este · Todos los derechos reservados
+      </div>
+    </div>
+  </footer>
+</Layout>

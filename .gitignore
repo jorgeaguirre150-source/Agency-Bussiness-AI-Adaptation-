@@ -1,0 +1,79 @@
+# ====================================================================
+# .gitignore — Web Agency IA
+# ====================================================================
+
+# Dependencias (no se commitean, se reinstalan con npm install)
+node_modules/
+**/node_modules/
+**/.pnp
+**/.pnp.js
+
+# Builds y salidas
+dist/
+**/dist/
+build/
+**/build/
+.next/
+.astro/
+**/.astro/
+.vercel/
+**/.vercel/
+.netlify/
+
+# Lighthouse reports (generados localmente)
+**/lighthouse-reports/
+
+# Entornos (NUNCA commitear .env)
+.env
+.env.local
+.env.production
+.env.development
+.env*.local
+**/.env
+**/.env.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor / IDE
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.tmp
+
+# Datos sensibles del negocio
+**/clientes-reales/
+**/secretos/
+**/credenciales/
+**/.secrets/
+*-cliente-confidencial.md
+api-keys.txt
+stripe-keys.txt
+
+# Tracker con datos reales (mantén la plantilla, no los datos)
+tracker/prospectos-reales.csv
+tracker/prospectos-reales.md
+tracker/clientes-firmados.csv
+
+# Caché y temp
+.cache/
+.temp/
+.tmp/
+*.bak
+*.backup

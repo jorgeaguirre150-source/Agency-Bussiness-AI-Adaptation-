@@ -1,0 +1,40 @@
+---
+export interface Props {
+  titulo: string;
+  parrafos: string[];
+  imagen: string;
+  imagenAlt: string;
+  datos?: { label: string; valor: string }[];
+}
+
+const { titulo, parrafos, imagen, imagenAlt, datos = [] } = Astro.props;
+---
+
+<section id="sobre-nosotros" class="bg-white">
+  <div class="section grid md:grid-cols-2 gap-12 items-center">
+    <div class="order-2 md:order-1">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6">{titulo}</h2>
+      {parrafos.map((p) => (
+        <p class="text-lg text-stone-600 mb-4 leading-relaxed">{p}</p>
+      ))}
+      {datos.length > 0 && (
+        <div class="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-stone-200">
+          {datos.map((d) => (
+            <div class="text-center">
+              <div class="text-3xl font-bold text-brand-600">{d.valor}</div>
+              <div class="text-sm text-stone-500 mt-1">{d.label}</div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+    <div class="order-1 md:order-2">
+      <img
+        src={imagen}
+        alt={imagenAlt}
+        class="rounded-3xl shadow-2xl w-full h-[500px] object-cover"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</section>

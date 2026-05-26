@@ -1,0 +1,230 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Mockup del Automatizador de Propuestas Comerciales
+
+const camposFormulario = [
+  { label: "Empresa prospecto", valor: "TechRevolution Industries S.L.", icono: "🏢" },
+  { label: "Contacto principal", valor: "Marta Ribera · Directora de Operaciones", icono: "👤" },
+  { label: "Sector", valor: "SaaS B2B · Marketing automation", icono: "💼" },
+  { label: "Tamaño empresa", valor: "45 empleados · €4.2M revenue 2025", icono: "📊" },
+  { label: "Necesidad concreta", valor: "Auditoría operativa + roadmap automatización 6 meses", icono: "🎯" },
+  { label: "Servicios solicitados", valor: "Diagnóstico + Workflow integraciones + Mantenimiento", icono: "⚙️" },
+  { label: "Urgencia", valor: "Alta — quieren empezar en 3 semanas", icono: "⏰" },
+  { label: "Competencia mencionada", valor: "Cotizó también con KPMG (presupuesto 3x)", icono: "🔍" }
+];
+
+const seccionesPropuesta = [
+  { titulo: "Carátula personalizada", descripcion: "Logo prospecto + tu logo + fecha + título cliente-céntrico", ok: true },
+  { titulo: "Análisis del problema", descripcion: "3 párrafos parafraseando la necesidad de TechRevolution en sus palabras", ok: true },
+  { titulo: "Solución propuesta", descripcion: "Roadmap de 6 sprints con entregables claros + responsables", ok: true },
+  { titulo: "Pricing calculado", descripcion: "$4.500 implementación + $400/mes mantenimiento Pro · Total año 1: $9.300", ok: true },
+  { titulo: "Caso de éxito relevante", descripcion: "Match automático: 'SaaS B2B Madrid · 38 empleados · automatización CRM + onboarding'", ok: true },
+  { titulo: "Próximos pasos", descripcion: "Llamada kickoff propuesta para semana 1 de junio", ok: true }
+];
+---
+
+<Layout
+  title="Automatización de Propuestas Comerciales — Mockup"
+  description="Cómo funciona un agente IA que genera propuestas comerciales personalizadas en 5 minutos"
+>
+  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-slate-950/70 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 text-white font-bold hover:text-indigo-400 transition-colors">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Volver al inicio
+      </a>
+      <a href="/#contacto" class="px-4 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium transition-colors">
+        Reservar diagnóstico
+      </a>
+    </div>
+  </nav>
+
+  <section class="pt-32 pb-12 px-4 sm:px-6 hero-gradient">
+    <div class="max-w-5xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/30 mb-6">
+        <span class="text-2xl">📄</span>
+        <span class="text-sm text-indigo-300">Caso de uso #3 · B2B mid-market</span>
+      </div>
+      <h1 class="text-4xl sm:text-6xl font-display font-bold text-white leading-tight mb-4">
+        Propuestas comerciales <span class="gradient-text">automáticas</span>
+      </h1>
+      <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+        Tu comercial rellena un formulario en 3 minutos. Tu propuesta personalizada de 6 páginas está en su email en 5 minutos.
+      </p>
+      <div class="mt-8 inline-flex flex-wrap gap-3 justify-center text-sm">
+        <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300">$3.500 implementación</span>
+        <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300">$400/mes Pro</span>
+        <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300">Entrega 3 semanas</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-display font-bold text-white text-center mb-12">
+        El flujo de tu comercial
+      </h2>
+
+      <div class="grid lg:grid-cols-2 gap-8 items-start">
+        <!-- Formulario izquierda -->
+        <div>
+          <div class="rounded-2xl bg-slate-900/50 border border-slate-800 overflow-hidden">
+            <div class="p-5 border-b border-slate-800 bg-gradient-to-r from-indigo-500/10 to-transparent">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="text-white font-semibold">📋 Nueva propuesta</h3>
+                  <div class="text-xs text-slate-400 mt-1">Rellena los campos · 3 min</div>
+                </div>
+                <span class="px-2 py-1 rounded text-xs bg-emerald-500/20 text-emerald-300">Borrador</span>
+              </div>
+            </div>
+
+            <div class="p-5 space-y-4">
+              {camposFormulario.map((campo) => (
+                <div>
+                  <label class="flex items-center gap-2 text-xs text-slate-400 mb-1.5 font-medium">
+                    <span>{campo.icono}</span>
+                    {campo.label}
+                  </label>
+                  <div class="bg-slate-950/50 border border-slate-800 rounded-lg px-3 py-2.5 text-sm text-slate-200">
+                    {campo.valor}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div class="p-5 border-t border-slate-800 bg-slate-950/30">
+              <button class="w-full px-4 py-3 rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white font-semibold transition-all card-glow-strong">
+                ⚡ Generar propuesta (5 min)
+              </button>
+              <div class="text-center mt-3 text-xs text-slate-500">
+                El sistema procesa tu input + datos de LinkedIn + casos pasados
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PDF preview derecha -->
+        <div>
+          <div class="rounded-2xl bg-white shadow-2xl overflow-hidden" style="box-shadow: 0 0 60px rgba(99, 102, 241, 0.2);">
+            <!-- PDF header -->
+            <div class="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+              <div class="flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-red-400"></div>
+                <div class="w-2 h-2 rounded-full bg-yellow-400"></div>
+                <div class="w-2 h-2 rounded-full bg-green-400"></div>
+                <span class="text-xs text-slate-500 ml-2">Propuesta-TechRevolution-2026-05-26.pdf</span>
+              </div>
+              <button class="text-xs text-indigo-600 hover:text-indigo-700 font-medium">⬇ Descargar</button>
+            </div>
+
+            <!-- PDF content -->
+            <div class="p-8 bg-white">
+              <div class="text-xs text-slate-500 mb-2">Propuesta de servicios · Mayo 2026</div>
+              <h2 class="text-2xl font-display font-bold text-slate-900 mb-2">
+                Auditoría operativa + Roadmap de automatización 6 meses
+              </h2>
+              <p class="text-slate-600 mb-4">Preparada para: <strong>TechRevolution Industries S.L.</strong></p>
+              <div class="text-xs text-slate-400 mb-6 pb-6 border-b border-slate-200">
+                Marta Ribera · Directora de Operaciones
+              </div>
+
+              <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">Resumen ejecutivo</h3>
+              <div class="space-y-2 mb-6 text-sm text-slate-700 leading-relaxed">
+                <p>Tras tu mensaje del lunes pasado, propongo un plan en 2 fases para automatizar los flujos operativos críticos que mencionaste, especialmente el onboarding de clientes nuevos y la gestión de incidencias entre CRM y soporte.</p>
+                <p class="text-slate-500">El plan completo en 6 secciones se detalla en las páginas siguientes...</p>
+              </div>
+
+              <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">Inversión</h3>
+              <div class="space-y-3">
+                {seccionesPropuesta.map((sec) => (
+                  <div class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 text-xs flex-shrink-0 mt-0.5">✓</div>
+                    <div class="flex-1">
+                      <div class="text-sm font-semibold text-slate-800">{sec.titulo}</div>
+                      <div class="text-xs text-slate-500 mt-0.5">{sec.descripcion}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div class="mt-6 pt-6 border-t border-slate-200 flex items-center justify-between">
+                <div>
+                  <div class="text-xs text-slate-500">Inversión total año 1</div>
+                  <div class="text-2xl font-bold text-slate-900">$9.300</div>
+                </div>
+                <div class="text-right">
+                  <div class="text-xs text-slate-500">Generado en</div>
+                  <div class="text-sm font-semibold text-indigo-600">4 min 23 seg</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-3 border-t border-slate-200 bg-slate-50 flex items-center justify-between">
+              <div class="text-xs text-slate-500">Página 1 de 6</div>
+              <div class="flex gap-2">
+                <button class="px-3 py-1 rounded text-xs bg-slate-200 text-slate-600">← Anterior</button>
+                <button class="px-3 py-1 rounded text-xs bg-indigo-500 text-white">Siguiente →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparativa antes/después -->
+  <section class="py-16 px-4 sm:px-6 bg-slate-950/50">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-display font-bold text-white text-center mb-12">
+        La diferencia que hace
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="rounded-2xl bg-red-500/5 border border-red-500/20 p-6">
+          <div class="text-red-400 text-sm font-bold uppercase tracking-wider mb-3">Sin sistema</div>
+          <div class="text-3xl font-bold text-white mb-4">3-4 horas</div>
+          <ul class="space-y-3 text-sm text-slate-300">
+            <li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Tu comercial deja todo lo demás para escribir 1 propuesta</span></li>
+            <li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Copy/paste de propuesta vieja, sin personalización real</span></li>
+            <li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Llega al prospecto pasadas 48-72h</span></li>
+            <li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Sin casos de éxito relevantes (los olvida o busca)</span></li>
+            <li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>El prospecto compara con quien ya respondió en 4h</span></li>
+          </ul>
+        </div>
+
+        <div class="rounded-2xl bg-emerald-500/5 border border-emerald-500/30 p-6 card-glow-strong">
+          <div class="text-emerald-400 text-sm font-bold uppercase tracking-wider mb-3">Con tu agente IA</div>
+          <div class="text-3xl font-bold text-white mb-4">5 minutos</div>
+          <ul class="space-y-3 text-sm text-slate-300">
+            <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>Comercial rellena 8 campos (3 min) y genera</span></li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>Personalización profunda: nombre, sector, datos reales del prospect</span></li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>En el email del prospecto antes de 1 hora</span></li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>Matching automático con tus mejores casos pasados</span></li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>Tú ganas el deal por velocidad + calidad superior</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 px-4 sm:px-6 hero-gradient">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl sm:text-5xl font-display font-bold text-white mb-6">
+        Propuestas que ganan
+      </h2>
+      <p class="text-xl text-slate-300 mb-8">
+        Si vuestro equipo comercial hace ≥15 propuestas/mes, este caso vuela.
+      </p>
+      <a href="/#contacto" class="inline-block px-8 py-4 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-semibold transition-all hover:scale-105 card-glow-strong">
+        Reservar diagnóstico (desde $300)
+      </a>
+    </div>
+  </section>
+
+  <footer class="border-t border-slate-800 py-8 px-4 text-center text-xs text-slate-600">
+    Agencia IA Madrid Este · Mockup interactivo del caso Automatización de Propuestas
+  </footer>
+</Layout>

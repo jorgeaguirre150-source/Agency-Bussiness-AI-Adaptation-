@@ -1,0 +1,79 @@
+---
+export interface Props {
+  direccion: string;
+  telefono: string;
+  email: string;
+  horario: { dias: string; horas: string }[];
+  googleMapsEmbed: string;
+  formspreeId?: string;
+}
+
+const { direccion, telefono, email, horario, googleMapsEmbed, formspreeId = "TU_FORMSPREE_ID" } = Astro.props;
+---
+
+<section id="contacto" class="section">
+  <h2 class="section-title">Reserva tu mesa</h2>
+  <p class="section-subtitle">Reserva online, llámanos o pasa a vernos. Te esperamos.</p>
+
+  <div class="grid md:grid-cols-2 gap-10">
+    <div class="space-y-6">
+      <div class="flex items-start gap-4">
+        <div class="bg-brand-100 p-3 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-1">Dirección</h3>
+          <p class="text-stone-600">{direccion}</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <div class="bg-brand-100 p-3 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-1">Teléfono</h3>
+          <a href={`tel:${telefono}`} class="text-brand-700 hover:underline">{telefono}</a>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <div class="bg-brand-100 p-3 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-1">Horario</h3>
+          {horario.map((h) => (
+            <p class="text-stone-600 text-sm">
+              <span class="font-medium text-stone-800">{h.dias}:</span> {h.horas}
+            </p>
+          ))}
+        </div>
+      </div>
+
+      <form action={`https://formspree.io/f/${formspreeId}`} method="POST" class="space-y-4 pt-4">
+        <input type="text" name="nombre" placeholder="Tu nombre" required class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent" />
+        <input type="tel" name="telefono" placeholder="Teléfono" required class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent" />
+        <div class="grid grid-cols-2 gap-3">
+          <input type="date" name="fecha" required class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent" />
+          <input type="number" name="personas" placeholder="Personas" min="1" max="20" required class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent" />
+        </div>
+        <textarea name="mensaje" placeholder="Alguna alergia o petición especial (opcional)" rows="3" class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent"></textarea>
+        <button type="submit" class="btn-primary w-full">Reservar mesa</button>
+      </form>
+    </div>
+
+    <div class="rounded-2xl overflow-hidden shadow-xl min-h-[500px]">
+      <iframe
+        src={googleMapsEmbed}
+        width="100%"
+        height="100%"
+        style="border:0;"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Ubicación del restaurante"
+      ></iframe>
+    </div>
+  </div>
+</section>
