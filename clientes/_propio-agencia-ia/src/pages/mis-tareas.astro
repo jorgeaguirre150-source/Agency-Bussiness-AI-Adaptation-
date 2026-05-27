@@ -1,0 +1,270 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+// Dashboard personal de tareas — NO enlazado desde el menu público
+// Acceso solo via URL directa /mis-tareas
+
+const tareas = [
+  // SETUP CEO
+  { id: 28, fase: "CEO", estado: "pending", prioridad: 1, titulo: "Setup financiero y legal", desc: "Alta autónomo + cuenta bancaria + gestoría + software facturación", semana: "Mes 1 día 1", duracion: "1 día" },
+  { id: 29, fase: "CEO", estado: "pending", prioridad: 2, titulo: "Setup perfil LinkedIn pro", desc: "Foto + banner + headline + about + 200 conexiones iniciales", semana: "Mes 1", duracion: "2-3h" },
+  { id: 30, fase: "CEO", estado: "pending", prioridad: 9, titulo: "Planning estratégico mensual", desc: "1h cada día 1 del mes · review KPIs + ajustes", semana: "Recurrente", duracion: "1h/mes" },
+
+  // LÍNEA 1 — Webs restaurantes
+  { id: 13, fase: "L1", estado: "completed", prioridad: 0, titulo: "Preparar assets para outreach", desc: "Demos, scripts, tracker, mi-instagram (DONE)", semana: "Sem 1 día 1-2", duracion: "" },
+  { id: 14, fase: "L1", estado: "pending", prioridad: 3, titulo: "Scrapear 50-200 restaurantes Torrejón", desc: "Google Maps + filtro 'sin web' · volcar al CSV", semana: "Sem 1 día 3-4", duracion: "3-4h" },
+  { id: 23, fase: "L1", estado: "pending", prioridad: 4, titulo: "Deploy 3 demos a Vercel", desc: "Italiano · Asador · Brunch en URLs públicas", semana: "Sem 1", duracion: "30 min" },
+  { id: 15, fase: "L1", estado: "pending", prioridad: 5, titulo: "Outreach Instagram 30-50 DMs/día", desc: "700-1.000 totales en 4 semanas · canal #1", semana: "Sem 1-4", duracion: "1h/día" },
+  { id: 16, fase: "L1", estado: "pending", prioridad: 6, titulo: "Cerrar primer cliente web", desc: "$400 web + propuesta upsell $400/mes", semana: "Sem 2-4", duracion: "5-10h" },
+  { id: 17, fase: "L1", estado: "pending", prioridad: 7, titulo: "Caso de estudio + 3 referidos", desc: "Tras primer cliente · multiplicador conversión", semana: "Sem 5", duracion: "4-6h" },
+  { id: 18, fase: "L1", estado: "pending", prioridad: 8, titulo: "Escalar a 5 webs + 3 mantenimientos", desc: "Objetivo MRR fase 0", semana: "Sem 5-12", duracion: "Continuo" },
+
+  // LÍNEA 2 — Agencia IA
+  { id: 19, fase: "L2", estado: "pending", prioridad: 10, titulo: "Detectar oportunidades premium L2", desc: "Escuchar en llamadas L1 · sin pitch · solo notas", semana: "Sem 3-6", duracion: "30min/llamada" },
+  { id: 24, fase: "L2", estado: "pending", prioridad: 11, titulo: "Construir bot WhatsApp template", desc: "n8n + Claude + Notion · 1 fin de semana intensivo", semana: "Mes 3", duracion: "8-10h" },
+  { id: 25, fase: "L2", estado: "pending", prioridad: 12, titulo: "Primer diagnóstico cross-sell L1→L2", desc: "$300 a tu mejor cliente L1 · conversión 30-40%", semana: "Mes 4", duracion: "5 días" },
+  { id: 26, fase: "L2", estado: "pending", prioridad: 13, titulo: "Deploy landing pública agencia IA", desc: "Vercel · clientes/_propio-agencia-ia/ · auto-deploy", semana: "Mes 3-4", duracion: "30 min" },
+  { id: 27, fase: "L2", estado: "pending", prioridad: 14, titulo: "Documentar primer caso de éxito", desc: "Testimonio vídeo + caso público · multiplicador 3-7 leads", semana: "Mes 5", duracion: "5-7h" },
+];
+
+const completadas = tareas.filter(t => t.estado === 'completed').length;
+const total = tareas.length;
+const porcentaje = Math.round((completadas / total) * 100);
+
+// Próximas 3 acciones priorizadas (excluye completadas, ordenadas por prioridad)
+const proximasAcciones = tareas
+  .filter(t => t.estado === 'pending')
+  .sort((a, b) => a.prioridad - b.prioridad)
+  .slice(0, 3);
+
+// Agrupadas por fase
+const tareasCEO = tareas.filter(t => t.fase === 'CEO').sort((a, b) => a.prioridad - b.prioridad);
+const tareasL1 = tareas.filter(t => t.fase === 'L1').sort((a, b) => a.prioridad - b.prioridad);
+const tareasL2 = tareas.filter(t => t.fase === 'L2').sort((a, b) => a.prioridad - b.prioridad);
+
+// Helper para clases de estado
+function estadoBadge(estado) {
+  if (estado === 'completed') return { class: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40', label: 'Completado', icono: '✓' };
+  if (estado === 'in_progress') return { class: 'bg-orange-500/20 text-orange-300 border-orange-500/40', label: 'En curso', icono: '◐' };
+  return { class: 'bg-slate-700/30 text-slate-400 border-slate-700', label: 'Pendiente', icono: '○' };
+}
+
+function faseColor(fase) {
+  if (fase === 'CEO') return { bg: 'bg-purple-500/10', border: 'border-purple-500/30', text: 'text-purple-400', icon: '👔' };
+  if (fase === 'L1') return { bg: 'bg-indigo-500/10', border: 'border-indigo-500/30', text: 'text-indigo-400', icon: '🍝' };
+  return { bg: 'bg-orange-500/10', border: 'border-orange-500/30', text: 'text-orange-400', icon: '🤖' };
+}
+---
+
+<Layout
+  title="Mis tareas — Dashboard CEO"
+  description="Dashboard personal de tareas del negocio. Acceso privado."
+>
+  <Nav activePath="/mis-tareas" />
+
+  <!-- Hero compact -->
+  <section class="pt-28 pb-8 px-4 sm:px-6 hero-gradient">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 mb-3">
+            <span class="w-2 h-2 rounded-full bg-orange-400 animate-pulse"></span>
+            <span class="text-xs text-orange-300 font-medium">Dashboard privado · Solo para ti</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-display font-bold text-white">
+            Mis tareas <span class="text-slate-500 text-2xl">· CEO Cockpit</span>
+          </h1>
+        </div>
+
+        <!-- Progress bar -->
+        <div class="w-full sm:w-96">
+          <div class="flex items-center justify-between text-sm mb-2">
+            <span class="text-slate-400">Progreso global</span>
+            <span class="text-white font-bold">{completadas}/{total} · {porcentaje}%</span>
+          </div>
+          <div class="h-3 rounded-full bg-slate-800 overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-emerald-500 to-indigo-500 transition-all" style={`width: ${porcentaje}%`}></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Próximas acciones (top 3) -->
+  <section class="py-12 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-orange-500/20 border border-orange-500/40 flex items-center justify-center text-2xl">🎯</div>
+        <div>
+          <h2 class="text-2xl font-display font-bold text-white">Tus próximas 3 acciones</h2>
+          <p class="text-sm text-slate-400">Lo que más importa esta semana. Ignora el resto hasta tener estas hechas.</p>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-4">
+        {proximasAcciones.map((t, i) => {
+          const color = faseColor(t.fase);
+          return (
+            <div class={`rounded-2xl bg-slate-900/50 border-2 ${color.border} p-5 hover:scale-[1.02] transition-all`}>
+              <div class="flex items-start justify-between mb-3">
+                <div class={`w-10 h-10 rounded-lg ${color.bg} border ${color.border} flex items-center justify-center text-xl`}>{color.icon}</div>
+                <div class="flex flex-col items-end gap-1">
+                  <span class={`text-xs font-bold ${color.text}`}>#{t.id} · {t.fase}</span>
+                  <span class="text-xs text-slate-500">{t.duracion}</span>
+                </div>
+              </div>
+              <h3 class="text-base font-bold text-white mb-2 leading-tight">{t.titulo}</h3>
+              <p class="text-sm text-slate-400 mb-3">{t.desc}</p>
+              <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs">
+                <span class="text-slate-500">{t.semana}</span>
+                <span class="text-orange-400 font-bold">#{i + 1} prioridad</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- Kanban por fase -->
+  <section class="py-8 px-4 sm:px-6 pb-20">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-2xl">📋</div>
+        <div>
+          <h2 class="text-2xl font-display font-bold text-white">Todas las tareas por fase</h2>
+          <p class="text-sm text-slate-400">Kanban completo · {total} tareas en 3 áreas del negocio</p>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6">
+        <!-- Columna CEO -->
+        <div class="rounded-2xl bg-slate-950/50 border border-purple-500/20 p-5">
+          <div class="flex items-center gap-3 mb-5 pb-4 border-b border-slate-800">
+            <span class="text-2xl">👔</span>
+            <div>
+              <h3 class="text-lg font-bold text-purple-300">Setup CEO</h3>
+              <p class="text-xs text-slate-500">{tareasCEO.length} tareas · base del negocio</p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            {tareasCEO.map((t) => {
+              const badge = estadoBadge(t.estado);
+              return (
+                <div class="rounded-xl bg-slate-900/50 border border-slate-800 hover:border-purple-500/30 p-4 transition-colors">
+                  <div class="flex items-start justify-between gap-2 mb-2">
+                    <span class="text-xs text-slate-500 font-mono">#{t.id}</span>
+                    <span class={`px-2 py-0.5 rounded text-xs font-medium border ${badge.class}`}>{badge.icono} {badge.label}</span>
+                  </div>
+                  <h4 class="text-sm font-bold text-white mb-1 leading-tight">{t.titulo}</h4>
+                  <p class="text-xs text-slate-400 mb-2">{t.desc}</p>
+                  <div class="flex items-center justify-between text-xs text-slate-500">
+                    <span>{t.semana}</span>
+                    <span>{t.duracion}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <!-- Columna L1 -->
+        <div class="rounded-2xl bg-slate-950/50 border border-indigo-500/20 p-5">
+          <div class="flex items-center gap-3 mb-5 pb-4 border-b border-slate-800">
+            <span class="text-2xl">🍝</span>
+            <div>
+              <h3 class="text-lg font-bold text-indigo-300">L1 · Webs restaurantes</h3>
+              <p class="text-xs text-slate-500">{tareasL1.length} tareas · cashflow rápido</p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            {tareasL1.map((t) => {
+              const badge = estadoBadge(t.estado);
+              return (
+                <div class={`rounded-xl bg-slate-900/50 border border-slate-800 hover:border-indigo-500/30 p-4 transition-colors ${t.estado === 'completed' ? 'opacity-60' : ''}`}>
+                  <div class="flex items-start justify-between gap-2 mb-2">
+                    <span class="text-xs text-slate-500 font-mono">#{t.id}</span>
+                    <span class={`px-2 py-0.5 rounded text-xs font-medium border ${badge.class}`}>{badge.icono} {badge.label}</span>
+                  </div>
+                  <h4 class={`text-sm font-bold mb-1 leading-tight ${t.estado === 'completed' ? 'text-slate-400 line-through' : 'text-white'}`}>{t.titulo}</h4>
+                  <p class="text-xs text-slate-400 mb-2">{t.desc}</p>
+                  <div class="flex items-center justify-between text-xs text-slate-500">
+                    <span>{t.semana}</span>
+                    <span>{t.duracion}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <!-- Columna L2 -->
+        <div class="rounded-2xl bg-slate-950/50 border border-orange-500/20 p-5">
+          <div class="flex items-center gap-3 mb-5 pb-4 border-b border-slate-800">
+            <span class="text-2xl">🤖</span>
+            <div>
+              <h3 class="text-lg font-bold text-orange-300">L2 · Agencia IA</h3>
+              <p class="text-xs text-slate-500">{tareasL2.length} tareas · destino estratégico</p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            {tareasL2.map((t) => {
+              const badge = estadoBadge(t.estado);
+              return (
+                <div class="rounded-xl bg-slate-900/50 border border-slate-800 hover:border-orange-500/30 p-4 transition-colors">
+                  <div class="flex items-start justify-between gap-2 mb-2">
+                    <span class="text-xs text-slate-500 font-mono">#{t.id}</span>
+                    <span class={`px-2 py-0.5 rounded text-xs font-medium border ${badge.class}`}>{badge.icono} {badge.label}</span>
+                  </div>
+                  <h4 class="text-sm font-bold text-white mb-1 leading-tight">{t.titulo}</h4>
+                  <p class="text-xs text-slate-400 mb-2">{t.desc}</p>
+                  <div class="flex items-center justify-between text-xs text-slate-500">
+                    <span>{t.semana}</span>
+                    <span>{t.duracion}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats footer -->
+  <section class="py-12 px-4 sm:px-6 bg-slate-950/50">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl font-display font-bold text-white mb-6 text-center">Resumen del estado</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="rounded-xl bg-slate-900/50 border border-emerald-500/20 p-5 text-center">
+          <div class="text-3xl font-bold text-emerald-400">{completadas}</div>
+          <div class="text-sm text-slate-400 mt-1">Completadas</div>
+        </div>
+        <div class="rounded-xl bg-slate-900/50 border border-orange-500/20 p-5 text-center">
+          <div class="text-3xl font-bold text-orange-400">{total - completadas}</div>
+          <div class="text-sm text-slate-400 mt-1">Pendientes</div>
+        </div>
+        <div class="rounded-xl bg-slate-900/50 border border-indigo-500/20 p-5 text-center">
+          <div class="text-3xl font-bold text-indigo-400">{tareasL1.filter(t => t.estado === 'pending').length}</div>
+          <div class="text-sm text-slate-400 mt-1">L1 pendientes</div>
+        </div>
+        <div class="rounded-xl bg-slate-900/50 border border-orange-500/20 p-5 text-center">
+          <div class="text-3xl font-bold text-orange-400">{tareasL2.filter(t => t.estado === 'pending').length}</div>
+          <div class="text-sm text-slate-400 mt-1">L2 pendientes</div>
+        </div>
+      </div>
+
+      <div class="mt-8 rounded-2xl bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/30 p-6 text-center">
+        <p class="text-sm text-slate-300 mb-2">Mantra del trimestre</p>
+        <p class="text-2xl sm:text-3xl font-display font-bold text-white mb-2">
+          "30 DMs/día durante 30 días. <span class="gradient-text">Sin negociar.</span>"
+        </p>
+        <p class="text-xs text-slate-500">El primer DM enviado es el verdadero gatillo del negocio.</p>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
