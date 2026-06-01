@@ -1,0 +1,13 @@
+{
+  "name": "prospector",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Prospector de clientes potenciales via Google Places API — para la agencia de auditoría e implementación de IA",
+  "scripts": {
+    "start": "node prospector.mjs",
+    "ejemplo": "node prospector.mjs --nicho abogados --zona \"Torrejón de Ardoz\" --max 40"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
