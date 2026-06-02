@@ -137,6 +137,56 @@ function csvCampo(v) {
   return /[",\n;]/.test(s) ? `"${s}"` : s;
 }
 
+// ---------- 4b. Detector de NECESIDAD ----------
+// Analiza señales públicas que indican que un negocio necesita la agencia.
+// Devuelve un score 0-100, un nivel, y el "porqué" (= tu gancho de venta).
+function analizarNecesidad(p) {
+  const web = p.websiteUri || "";
+  const reviews = p.userRatingCount || 0;
+  const rating = p.rating || 0;
+  const tieneTel = !!(p.nationalPhoneNumber || p.internationalPhoneNumber);
+
+  // ¿La "web" es en realidad una red social / linktree? = no tiene web propia.
+  const esWebSocial = /facebook\.|instagram\.|linktr\.|tiktok\.|wa\.me|business\.site|beacons\.|linktree/i.test(web);
+  const sinWeb = !web;
+  const tieneWebReal = web && !esWebSocial;
+
+  let score = 0;
+  const motivos = [];
+
+  // Señal 1 — presencia digital (la más importante)
+  if (sinWeb) { score += 45; motivos.push("sin web propia"); }
+  else if (esWebSocial) { score += 35; motivos.push("solo redes sociales (sin web propia)"); }
+
+  // Señal 2 — volumen de actividad (muchos clientes = mucha gestión manual = necesita automatizar)
+  if (reviews > 100) { score += 25; motivos.push(`${reviews} reseñas (mucho volumen de clientes)`); }
+  else if (reviews >= 30) { score += 15; motivos.push(`${reviews} reseñas (negocio activo)`); }
+  else if (reviews >= 10) { score += 8; }
+  else if (reviews > 0) { score += 3; motivos.push("poca presencia online (pocas reseñas)"); }
+
+  // Señal 3 — reputación mejorable (margen para mejorar atención al cliente con IA)
+  if (rating >= 3 && rating <= 4.2 && reviews >= 5) { score += 15; motivos.push(`rating ${rating} (mejorable)`); }
+  else if (rating > 4.2 && rating <= 4.6) { score += 8; }
+  else if (rating < 3 && reviews >= 5) { score += 5; motivos.push(`rating ${rating} (problemas de reputación)`); }
+
+  // Señal 4 — contactable por teléfono (canal saturable que la IA descarga)
+  if (tieneTel) { score += 5; }
+
+  if (score > 100) score = 100;
+
+  let nivel;
+  if (score >= 60) nivel = "🔥 ALTA";
+  else if (score >= 35) nivel = "🟡 MEDIA";
+  else nivel = "🟢 BAJA";
+
+  return {
+    score,
+    nivel,
+    sinWebReal: sinWeb || esWebSocial,
+    porque: motivos.join(" · ") || "presencia digital aceptable"
+  };
+}
+
 // ---------- 5. Ejecución ----------
 console.log(`\n🔎 Prospección: ${nicho.label}  ·  ${zona}\n`);
 
@@ -153,20 +203,25 @@ for (const query of nicho.queries) {
       vistos.add(p.id);
       nuevos++;
       const tieneWeb = p.websiteUri ? "sí" : "NO";
+      const n = analizarNecesidad(p);
       filas.push({
+        // --- prioridad de necesidad (lo primero que miras) ---
+        nivel_necesidad: n.nivel,
+        score_necesidad: n.score,
+        por_que_necesita: n.porque,
+        // --- datos del negocio ---
         nombre: p.displayName?.text || "",
         nicho: nicho.key,
         zona,
         direccion: p.formattedAddress || "",
         telefono: p.nationalPhoneNumber || p.internationalPhoneNumber || "",
         web: p.websiteUri || "",
-        tiene_web: tieneWeb,
-        oportunidad: tieneWeb === "NO" ? "🎯 ORO (sin web)" : "",
+        tiene_web_propia: n.sinWebReal ? "NO" : "sí",
         rating: p.rating ?? "",
         num_reviews: p.userRatingCount ?? "",
         estado_negocio: p.businessStatus || "",
         maps_url: p.googleMapsUri || "",
-        // columnas para el embudo (las rellenas tú al contactar):
+        // --- columnas para el embudo (las rellenas tú al contactar) ---
         estado_contacto: "nuevo",
         canal: "",
         fecha_contacto: "",
@@ -184,10 +239,9 @@ if (filas.length === 0) {
   process.exit(0);
 }
 
-// Ordenar: oportunidades (sin web) primero, luego por num reviews desc
+// Ordenar por NECESIDAD: los que más requieren asistencia, primero.
 filas.sort((a, b) => {
-  if (a.tiene_web === "NO" && b.tiene_web !== "NO") return -1;
-  if (a.tiene_web !== "NO" && b.tiene_web === "NO") return 1;
+  if (b.score_necesidad !== a.score_necesidad) return b.score_necesidad - a.score_necesidad;
   return (b.num_reviews || 0) - (a.num_reviews || 0);
 });
 
@@ -207,20 +261,37 @@ const outPath = join(outDir, `${slug}.csv`);
 writeFileSync(outPath, "﻿" + csv, "utf8"); // BOM para que Excel abra UTF-8 bien
 
 // ---------- 7. Resumen ----------
-const sinWeb = filas.filter(f => f.tiene_web === "NO").length;
-const conWeb = filas.length - sinWeb;
+const alta = filas.filter(f => f.nivel_necesidad.includes("ALTA")).length;
+const media = filas.filter(f => f.nivel_necesidad.includes("MEDIA")).length;
+const baja = filas.filter(f => f.nivel_necesidad.includes("BAJA")).length;
+const sinWeb = filas.filter(f => f.tiene_web_propia === "NO").length;
+
+// Top 5 de mayor necesidad para verlos en consola al instante
+const top = filas.slice(0, 5);
 
 console.log(`
-✅ ${filas.length} prospectos encontrados
-   🎯 ${sinWeb} SIN web  (oportunidad oro — necesitan presencia digital + IA)
-   🌐 ${conWeb} con web  (segundo objetivo — automatización/IA sobre lo que ya tienen)
+✅ ${filas.length} prospectos encontrados · ordenados por NECESIDAD de asistencia
 
-💡 Dolor IA de este nicho (úsalo en el primer contacto):
+   🔥 ${alta} ALTA necesidad   → empieza por estos
+   🟡 ${media} MEDIA necesidad
+   🟢 ${baja} BAJA necesidad
+   (${sinWeb} sin web propia)
+
+🏆 TOP 5 que más necesitan tu ayuda:`);
+
+top.forEach((f, i) => {
+  console.log(`   ${i + 1}. ${f.nivel_necesidad}  ${f.nombre}`);
+  console.log(`      → ${f.por_que_necesita}`);
+  console.log(`      ${f.telefono || "(sin tel)"}  ·  ${f.maps_url}`);
+});
+
+console.log(`
+💡 Gancho de venta del nicho (úsalo en el primer contacto):
    ${nicho.dolor_ia}
 
-📄 CSV guardado en:
+📄 CSV completo (ordenado por necesidad) en:
    ${outPath}
 
-➡️  Siguiente paso: importa el CSV a tu CRM/Notion y arranca el embudo
-   (email de prospección / llamada / DM). Plantillas en agencia-ia/scripts-outreach/.
+➡️  Siguiente paso: contacta a los 🔥 ALTA primero. Cada fila trae su "por_que_necesita"
+   = tu ángulo de venta concreto. Guiones en agencia-ia/scripts-outreach/.
 `);
