@@ -1,0 +1,9 @@
+{
+  "name": "agencia-ia-madrid-este",
+  "version": "0.1.0",
+  "description": "Flujos de trabajo de la agencia de auditoría e implementación de IA: prospección de clientes por nicho, outreach personalizado, propuestas de diagnóstico y auditoría de negocios. Nichos: abogados, clínicas, tiendas, concesionarios y restaurantes.",
+  "author": {
+    "name": "Jorge Aguirre"
+  },
+  "keywords": ["agencia", "ia", "auditoria", "prospeccion", "ventas", "consultoria"]
+}
