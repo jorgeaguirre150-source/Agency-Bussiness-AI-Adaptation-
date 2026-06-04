@@ -1,10 +1,10 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://CLIENTE-DOMAIN.com',
-  integrations: [tailwind(), sitemap()],
+  // Demo de escaparate: el sitemap se reactiva en la web del cliente real (con su dominio).
+  site: 'https://demo-brunch-veredillascoffee.vercel.app',
+  integrations: [tailwind()],
   build: {
     inlineStylesheets: 'auto'
   },
