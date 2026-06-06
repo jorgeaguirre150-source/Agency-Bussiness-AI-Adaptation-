@@ -26,7 +26,8 @@ rows = rows.filter((r) => {
   return /^\+34[\d ]{7,}$/.test(tel) && /no|false/i.test(web);
 });
 
-const top = rows.slice(0, 10);
+const MAX = Number(process.argv[3]) || 30;
+const top = rows.slice(0, MAX);
 
 const DEMO_URL = "https://demo-trattoria-mario.vercel.app"; // <-- cambia por tu URL real tras deploy
 const TU_NOMBRE = "Jorge";
